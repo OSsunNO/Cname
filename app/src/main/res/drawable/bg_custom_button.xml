@@ -1,0 +1,11 @@
+<!--이 파일은 그냥 custom button 만들기 위한 drawable source입니다.-->
+<!--TextView로 만든 버튼의 모서리를 둥글게 만드는거.-->
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_focused="false" android:state_pressed="false">
+        <shape>
+            <solid android:color="#4D4C4A"/>
+            <corners android:radius="4dp"/>
+        </shape>
+    </item>
+</selector>
