@@ -4,8 +4,10 @@
     <!--TextView로 만든 버튼의 모서리를 둥글게 만드는거.-->
     <item android:state_focused="false" android:state_pressed="false">
         <shape>
-            <solid android:color="#4D4C4A"/>
-            <corners android:radius="4dp"/>
+            <solid android:color="#f0f0f0"/>
+            <stroke android:color="#7c7c7c"
+                android:width="2dp"/>
+            <corners android:radius="10dp"/>
         </shape>
     </item>
 </selector>
