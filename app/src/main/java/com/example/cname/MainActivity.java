@@ -7,7 +7,6 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.Toolbar;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -16,10 +15,9 @@ public class MainActivity extends AppCompatActivity
     private BottomNavigationView bottomNavigationView; // 바텀 네비게이션 뷰
     private FragmentManager fm;
     private FragmentTransaction ft;
-    private Frag1_list frag1_list;
-    private Frag2_send frag2_send;
-    private Frag3_record frag3_record;
-    private Frag4_user frag4_user;
+    private Frag1 frag1;
+    private Frag2 frag2;
+    private Frag3 frag3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -38,24 +36,20 @@ public class MainActivity extends AppCompatActivity
                     case R.id.action_list:
                         setFrag(0);
                         break;
-                    case R.id.action_sending:
+                    case R.id.action_record:
                         setFrag(1);
                         break;
-                    case R.id.action_record:
-                        setFrag(2);
-                        break;
                     case R.id.action_myNameCard:
-                        setFrag(3);
+                        setFrag(2);
                         break;
                 }
                 return true;
             }
         });
 
-        frag1_list=new Frag1_list();
-        frag2_send=new Frag2_send();
-        frag3_record=new Frag3_record();
-        frag4_user=new Frag4_user();
+        frag1=new Frag1();
+        frag2=new Frag2();
+        frag3=new Frag3();
         setFrag(0); // 첫 프래그먼트 화면 지정
     }
 
@@ -67,22 +61,17 @@ public class MainActivity extends AppCompatActivity
         switch (n)
         {
             case 0:
-                ft.replace(R.id.Main_Frame,frag1_list);
+                ft.replace(R.id.Main_Frame,frag1);
                 ft.commit();
                 break;
 
             case 1:
-                ft.replace(R.id.Main_Frame,frag2_send);
+                ft.replace(R.id.Main_Frame,frag2);
                 ft.commit();
                 break;
 
             case 2:
-                ft.replace(R.id.Main_Frame,frag3_record);
-                ft.commit();
-                break;
-
-            case 3:
-                ft.replace(R.id.Main_Frame,frag4_user);
+                ft.replace(R.id.Main_Frame,frag3);
                 ft.commit();
                 break;
 
