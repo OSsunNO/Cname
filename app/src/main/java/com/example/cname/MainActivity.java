@@ -12,7 +12,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity
 {
-    private BottomNavigationView bottomNavigationView; // 바텀 네비게이션 뷰
+    private BottomNavigationView bottomNavigationView; // 바텀 네비게이션 뷰 수정한다.
     private FragmentManager fm;
     private FragmentTransaction ft;
     private Frag1 frag1;
