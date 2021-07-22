@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity
         frag2=new Frag2();
         frag3=new Frag3();
         frag4=new Frag4();
-        setFrag(1); // 첫 프래그먼트 화면 지정
+        bottomNavigationView.setSelectedItemId(R.id.action_list); //첫 프래그먼트 화면 지정
     }
 
     // 프레그먼트 교체
