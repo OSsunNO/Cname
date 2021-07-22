@@ -1,4 +1,4 @@
-package com.example.cname;
+package com.cname.nada;
 
 import org.junit.Test;
 
