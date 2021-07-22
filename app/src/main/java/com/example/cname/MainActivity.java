@@ -34,17 +34,20 @@ public class MainActivity extends AppCompatActivity
             {
                 switch (menuItem.getItemId())
                 {
-                    case R.id.action_list:
+                    case R.id.action_myNameCard:
                         setFrag(0);
                         break;
-                    case R.id.action_record:
+
+                    case R.id.action_list:
                         setFrag(1);
                         break;
-                    case R.id.action_myNameCard:
+
+                    case R.id.action_record:
                         setFrag(2);
                         break;
+
                     case R.id.action_more:
-                        setFrag(4);
+                        setFrag(3);
                 }
                 return true;
             }
@@ -54,7 +57,7 @@ public class MainActivity extends AppCompatActivity
         frag2=new Frag2();
         frag3=new Frag3();
         frag4=new Frag4();
-        setFrag(0); // 첫 프래그먼트 화면 지정
+        setFrag(1); // 첫 프래그먼트 화면 지정
     }
 
     // 프레그먼트 교체
