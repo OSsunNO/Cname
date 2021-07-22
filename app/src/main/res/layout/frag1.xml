@@ -25,15 +25,15 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.883"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="@+id/RecordBtn"
+        app:layout_constraintRight_toRightOf="@+id/SendBtn"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.019"
         android:contentDescription="@string/search"/>
     <ImageView
-        android:id="@+id/RecordBtn"
+        android:id="@+id/SendBtn"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:src="@drawable/record_icon"
+        android:src="@drawable/send_icon"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.895"
         app:layout_constraintLeft_toLeftOf="parent"
