@@ -1,4 +1,4 @@
-package com.cname.nada;
+package com.example.cname;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
