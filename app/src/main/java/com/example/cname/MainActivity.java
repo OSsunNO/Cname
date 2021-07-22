@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity
     private Frag1 frag1;
     private Frag2 frag2;
     private Frag3 frag3;
+    private Frag4 frag4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -42,6 +43,8 @@ public class MainActivity extends AppCompatActivity
                     case R.id.action_myNameCard:
                         setFrag(2);
                         break;
+                    case R.id.action_more:
+                        setFrag(4);
                 }
                 return true;
             }
@@ -50,6 +53,7 @@ public class MainActivity extends AppCompatActivity
         frag1=new Frag1();
         frag2=new Frag2();
         frag3=new Frag3();
+        frag4=new Frag4();
         setFrag(0); // 첫 프래그먼트 화면 지정
     }
 
@@ -72,6 +76,10 @@ public class MainActivity extends AppCompatActivity
 
             case 2:
                 ft.replace(R.id.Main_Frame,frag3);
+                ft.commit();
+                break;
+            case 3:
+                ft.replace(R.id.Main_Frame,frag4);
                 ft.commit();
                 break;
 
