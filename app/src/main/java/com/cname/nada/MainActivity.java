@@ -1,14 +1,23 @@
 package com.cname.nada;
 
+import android.content.res.AssetManager;
+import android.os.Bundle;
+import android.view.MenuItem;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.os.Bundle;
-import android.view.MenuItem;
-
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 public class MainActivity extends AppCompatActivity
 {
@@ -57,7 +66,28 @@ public class MainActivity extends AppCompatActivity
         frag2=new Frag2();
         frag3=new Frag3();
         frag4=new Frag4();
-        bottomNavigationView.setSelectedItemId(R.id.action_list); //첫 프래그먼트 화면 지정
+
+        try{
+            AssetManager assetManager = getAssets();
+            InputStream is = assetManager.open("jsons/start_frag_num.json");
+            InputStreamReader isr = new InputStreamReader(is);
+            BufferedReader reader = new BufferedReader(isr);
+
+            StringBuffer buffer = new StringBuffer();
+            String line = reader.readLine();
+            while(line!=null){
+                buffer.append(line+"\n");
+                line=reader.readLine();
+            }
+
+            String jsonData = buffer.toString();
+
+            JSONObject jsonObject = new JSONObject(jsonData);
+            String name = jsonObject.getString("name");
+            String packages = getPackageName();
+            int startFragNum = getResources().getIdentifier(name, "id", packages);
+            bottomNavigationView.setSelectedItemId(startFragNum); //첫 프래그먼트 화면 지정
+        } catch (IOException e) { e.printStackTrace();} catch (JSONException e) {e.printStackTrace();}
     }
 
     // 프레그먼트 교체
