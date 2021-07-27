@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.cname.nada">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android:permission.ACCESS_WIFI_STATE"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher_nada"
@@ -9,16 +12,21 @@
         android:roundIcon="@mipmap/ic_launcher_nada_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name="com.cname.nada.MainActivity">
+        <activity
+            android:name=".SplashActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/SplashTheme"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.cname.nada.List_search"/>
-        <activity android:name="com.cname.nada.Send"/>
-        <activity android:name="com.cname.nada.List_settings"/>
+        <activity android:name=".MainActivity"/>
+        <activity android:name=".List_search" />
+        <activity android:name=".Send" />
+        <activity android:name=".List_settings" />
     </application>
 
 </manifest>
