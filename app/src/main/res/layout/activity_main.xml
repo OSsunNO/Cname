@@ -16,7 +16,9 @@
         app:itemIconTint="#000000"
         app:itemTextColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:menu="@menu/menulist" />
+        app:menu="@menu/menulist"
+        app:layout_behavior="tech.thdev.app.view.BottomNavigationBehavior" />
+
 
     <FrameLayout
         android:id="@+id/Main_Frame"
