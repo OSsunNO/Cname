@@ -3,9 +3,13 @@ package com.cname.nada;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -46,11 +50,29 @@ public class Frag2 extends Fragment {
         settingsInListBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(),List_settings.class);
-                startActivity(intent);
-            }
-        });
+                PopupMenu popup = new PopupMenu(getContext(), v);
+                MenuInflater inflater = popup.getMenuInflater();
+                Menu menu = popup.getMenu();
 
-        return view;
+                inflater.inflate(R.menu.listmenu, menu);
+
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch (item.getItemId()) {
+                            case R.id.delete:
+                                break;
+                            case R.id.block:
+                                break;
+                            case R.id.tmenu:
+                                break;
+                        }
+                        return false;
+                    }
+                });
+                popup.show();
+            }
+    });
+    return view;
     }
 }
