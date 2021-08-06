@@ -1,7 +1,6 @@
 package com.cname.nada;
 
 import android.os.Bundle;
-import android.os.strictmode.WebViewMethodCalledOnWrongThreadViolation;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -10,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.cname.nada.functions.SearchAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
