@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -19,6 +20,7 @@ public class Frag1 extends Fragment {
     private ImageView editBtn;
     private boolean showingBack;
     private FrameLayout nameCardView;
+    private Button addCareerBtn, sendBtn;
 
 
     @Nullable
@@ -30,6 +32,15 @@ public class Frag1 extends Fragment {
         nameCardIntroduction = (TextView) view.findViewById(R.id.nameCardIntroduction);
         editBtn = (ImageView) view.findViewById(R.id.EditBtn);
         nameCardView = (FrameLayout) view.findViewById(R.id.container);
+        sendBtn = (Button) view.findViewById(R.id.SendBtn);
+
+        sendBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(),Send.class);
+                startActivity(intent);
+            }
+        });
 
         showingBack = false;
 
