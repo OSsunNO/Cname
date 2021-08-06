@@ -1,5 +1,6 @@
 package com.cname.nada;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -9,13 +10,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.PopupMenu;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.cname.nada.functions.ChangeStartFrag;
+import java.io.IOException;
+import java.io.OutputStream;
 
 public class Frag4 extends Fragment {
     private View view;
@@ -38,22 +39,27 @@ public class Frag4 extends Fragment {
                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
-                        ChangeStartFrag csf = new ChangeStartFrag();
-                        switch (item.getItemId()) {
-                            case R.id.action_myNameCard:
-                                Toast.makeText(getContext(), "안녕", Toast.LENGTH_SHORT).show();
-                                csf.changeStartFrag("action_myNameCard");
-                                break;
-                            case R.id.action_list:
-                                csf.changeStartFrag("action_list");
-                                break;
-                            case R.id.action_record:
-                                csf.changeStartFrag("action_record");
-                                break;
-                            case R.id.action_more:
-                                csf.changeStartFrag("action_more");
-                                break;
-                        }
+                        try{
+                            OutputStream outFs = getActivity().openFileOutput("startFragNum.txt", Context.MODE_PRIVATE);
+                            switch (item.getItemId()) {
+                                case R.id.action_myNameCard:
+                                    outFs.write("0".getBytes());
+                                    outFs.close();
+                                    break;
+                                case R.id.action_list:
+                                    outFs.write("1".getBytes());
+                                    outFs.close();
+                                    break;
+                                case R.id.action_record:
+                                    outFs.write("2".getBytes());
+                                    outFs.close();
+                                    break;
+                                case R.id.action_more:
+                                    outFs.write("3".getBytes());
+                                    outFs.close();
+                                    break;
+                            }
+                        } catch (IOException e) { }
                         return false;
                     }
                 });
