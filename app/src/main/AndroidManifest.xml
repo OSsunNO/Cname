@@ -3,7 +3,7 @@
     package="com.cname.nada">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android:permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android:permission.ACCESS_WIFI_STATE" />
 
     <application
         android:allowBackup="true"
@@ -12,18 +12,18 @@
         android:roundIcon="@mipmap/ic_launcher_nada_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
+        <activity android:name=".MyProfileEditPage"></activity>
         <activity
             android:name=".SplashActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/SplashTheme"
-            >
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"/>
+        <activity android:name=".MainActivity" />
         <activity android:name=".List_search" />
         <activity android:name=".Send" />
         <activity android:name=".List_settings" />

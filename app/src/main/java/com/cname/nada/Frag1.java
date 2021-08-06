@@ -1,5 +1,6 @@
 package com.cname.nada;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,6 +32,14 @@ public class Frag1 extends Fragment {
         nameCardView = (FrameLayout) view.findViewById(R.id.container);
 
         showingBack = false;
+
+        editBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(),MyProfileEditPage.class);
+                startActivity(intent);
+            }
+        });
 
         if(savedInstanceState == null) {
             getFragmentManager().beginTransaction().add(R.id.container, new CardFrontFragment()).commit();

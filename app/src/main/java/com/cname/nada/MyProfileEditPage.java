@@ -1,24 +1,24 @@
 package com.cname.nada;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
-import androidx.appcompat.app.AppCompatActivity;
+public class MyProfileEditPage extends AppCompatActivity {
 
-public class Send extends AppCompatActivity {
-
-    private ImageView returnBtn;
+    private ImageView saveBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.send_page);
+        setContentView(R.layout.my_profile_edit_page);
 
-        returnBtn = (ImageView) findViewById(R.id.ReturnBtn);
+        saveBtn = (ImageView) findViewById(R.id.SaveBtn);
 
-        returnBtn.setOnClickListener(new View.OnClickListener() {
+        saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
