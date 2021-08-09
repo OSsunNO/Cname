@@ -3,6 +3,12 @@
     <item>
         <shape>
             <corners android:radius="20dp"/>
+
+            <solid android:color="@color/white"/>
+            <stroke
+                android:color="@color/black0"
+                android:width="2dp"
+                />
         </shape>
     </item>
 </selector>

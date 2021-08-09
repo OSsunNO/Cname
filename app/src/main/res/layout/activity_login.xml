@@ -5,21 +5,32 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:background="@color/black2">
+    android:background="@color/white1">
+
+
+    <ImageView
+        android:id="@+id/Logo"
+        android:layout_width="300dp"
+        android:layout_height="200dp"
+        android:src="@drawable/logo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.273" />
 
     <Button
         android:id="@+id/GoogleLoginButton"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="75dp"
         android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="90dp"
         android:text="google로 로그인하기"
         android:textColor="@color/black0"
         android:textSize="18sp"
         android:textStyle="bold"
         android:drawableLeft="@drawable/google_logo_resized"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:backgroundTint="@color/white"
+        app:layout_constraintTop_toBottomOf="@+id/Logo"
         android:background="@drawable/login_custom"
         android:paddingLeft="15dp"
         />
@@ -27,8 +38,8 @@
     <Button
         android:id="@+id/NaverLoginButton"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_marginTop="15dp"
+        android:layout_height="75dp"
+        android:layout_marginTop="20dp"
         android:layout_marginHorizontal="30dp"
         android:text="naver로 로그인하기"
         android:textColor="@color/black0"
@@ -36,21 +47,29 @@
         android:textStyle="bold"
         android:drawableLeft="@drawable/naver_logo_resized"
         app:layout_constraintTop_toBottomOf="@+id/GoogleLoginButton"
-        android:backgroundTint="@color/white"
         android:background="@drawable/login_custom"
         android:paddingLeft="15dp"
         />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/sign_in_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-<!--
-<Button
-android:id="@+id/GoogleLoginButton"
-android:layout_width="match_parent"
-android:layout_height="60dp"
-android:layout_marginHorizontal="30dp"
-android:text="Google로 로그인하기"
-android:drawableLeft="@drawable/google_logo_resized"
-android:drawablePadding="5dp"
-    />
--->
+    <Button
+        android:id="@+id/logoutBt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="로그아웃"
+        android:layout_marginTop="92dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sign_in_button" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
