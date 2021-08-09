@@ -15,8 +15,13 @@ public class SplashActivity extends AppCompatActivity {
 
         isConnected(getApplicationContext());
 
-        startActivity(new Intent(getApplicationContext(), MainActivity.class));
-        finish();
+        if(1 == 1) {
+            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+            finish();
+        } else {
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            finish();
+        }
 
     }
 }

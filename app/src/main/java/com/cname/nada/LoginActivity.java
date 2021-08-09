@@ -24,18 +24,25 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     GoogleSignInClient mGoogleSignInClient;
     private final int RC_SIGN_IN = 123;
     private static final String TAG = "LoginActivity";
-    SignInButton signBt;
-    Button logoutBt;
+    SignInButton googleSignBt;
+    private Button fakeGoogle;
+    Button logoutBt, toTheMainBt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        signBt = findViewById(R.id.sign_in_button);
-        signBt.setOnClickListener(this);
+        fakeGoogle = (Button) findViewById(R.id.GoogleLoginFake);
+        googleSignBt = findViewById(R.id.GoogleLoginButton);
+        fakeGoogle.setOnClickListener(this);
+//        googleSignBt.setOnClickListener(this);
+
         logoutBt = findViewById(R.id.logoutBt);
         logoutBt.setOnClickListener(this);
+
+        toTheMainBt = (Button) findViewById(R.id.ToTheMainButton);
+        toTheMainBt.setOnClickListener(this);
 
         // 앱에 필요한 사용자 데이터를 요청하도록 로그인 옵션을 설정한다.
 // DEFAULT_SIGN_IN parameter는 유저의 ID와 기본적인 프로필 정보를 요청하는데 사용된다.
@@ -58,7 +65,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.sign_in_button:
+            case R.id.GoogleLoginFake:
+                googleSignBt.performClick();
                 signIn();
                 break;
             case R.id.logoutBt:
@@ -69,6 +77,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     .addOnCompleteListener(this, task1 -> Log.d(TAG, "onClick:revokeAccess success "));
 
                         });
+                break;
+            case R.id.ToTheMainButton:
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                finish();
                 break;
         }
     }
