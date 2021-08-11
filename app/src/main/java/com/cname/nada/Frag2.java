@@ -34,7 +34,7 @@ public class Frag2 extends Fragment {
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(),List_search.class);
+                Intent intent = new Intent(getContext(),LoginActivity.class);
                 startActivity(intent);
             }
         });
