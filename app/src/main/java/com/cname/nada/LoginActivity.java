@@ -17,6 +17,18 @@ import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 
+import org.json.JSONException;
+import org.json.JSONStringer;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import static android.content.ContentValues.TAG;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
@@ -47,6 +59,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         // 앱에 필요한 사용자 데이터를 요청하도록 로그인 옵션을 설정한다.
 // DEFAULT_SIGN_IN parameter는 유저의 ID와 기본적인 프로필 정보를 요청하는데 사용된다.
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken("1055755332536-5ecrjokk429a4eb7cbk0sqmq9qa6mo80.apps.googleusercontent.com")
                 .requestEmail() // email addresses도 요청함
                 .build();
 
@@ -58,6 +71,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         // 로그인 되어있을때
         if (gsa != null && gsa.getId() != null) {
+//            updateUI(acct);
         }
 
     }
@@ -75,7 +89,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             Log.d(TAG, "onClick:logout success ");
                             mGoogleSignInClient.revokeAccess()
                                     .addOnCompleteListener(this, task1 -> Log.d(TAG, "onClick:revokeAccess success "));
-
                         });
                 break;
             case R.id.ToTheMainButton:
@@ -108,6 +121,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             GoogleSignInAccount acct = completedTask.getResult(ApiException.class);
 
             if (acct != null) {
+                String personToken = acct.getIdToken();
                 String personName = acct.getDisplayName();
                 String personGivenName = acct.getGivenName();
                 String personFamilyName = acct.getFamilyName();
@@ -121,12 +135,85 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 Log.d(TAG, "handleSignInResult:personId "+personId);
                 Log.d(TAG, "handleSignInResult:personFamilyName "+personFamilyName);
                 Log.d(TAG, "handleSignInResult:personPhoto "+personPhoto);
+
+                sendJsonDataToServer(makeJsonMsg(personName, personEmail),
+                        "http://ec2-3-37-249-141.ap-northeast-2.compute.amazonaws.com:8080/user/login/google");
             }
+//            updateUI(acct);
         } catch (ApiException e) {
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
-            Log.e(TAG, "signInResult:failed code=" + e.getStatusCode());
+            Log.w(TAG, "signInResult:failed code=" + e.getStatusCode());
+//            updateUI(null);
 
         }
+    }
+
+    private static String makeJsonMsg(String name, String email) {
+        String retMsg = "";
+
+        JSONStringer jsonStringer = new JSONStringer();
+
+        try {
+            retMsg = jsonStringer.object().key("name").value(name).key("email").value(email).endObject().toString();
+            Log.d (TAG, "send string = " + retMsg);
+        } catch (JSONException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return retMsg;
+    }
+
+    static public String sendJsonDataToServer(String JsonMsg, String ServerURL) {
+        OutputStream os = null;
+        InputStream is = null;
+        ByteArrayOutputStream baos = null;
+        HttpURLConnection conn = null;
+        String response="";
+
+        try {
+            URL url = new URL(ServerURL);
+            conn = (HttpURLConnection)url.openConnection();
+            conn.setConnectTimeout(5 * 1000);
+            conn.setReadTimeout(5 * 1000);
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("Cache-Control", "no-cache");
+            conn.setRequestProperty("Content-Type", "application/json");
+            conn.setRequestProperty("Accept", "application/json");
+            conn.setDoOutput(true);
+            conn.setDoInput(true);
+
+            os = conn.getOutputStream();
+            os.write(JsonMsg.getBytes());
+            os.flush();
+            int responseCode = conn.getResponseCode();
+
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                is = conn.getInputStream();
+                baos = new ByteArrayOutputStream();
+                byte[] byteBuffer = new byte[1024];
+                byte[] byteData = null;
+                int nLength = 0;
+                while((nLength = is.read(byteBuffer, 0, byteBuffer.length)) != -1) {
+                    baos.write(byteBuffer, 0, nLength);
+                }
+                byteData = baos.toByteArray();
+                response = new String(byteData);
+
+                Log.i(TAG, "DATA response = " + response);
+            }
+        } catch (MalformedURLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return null;
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return null;
+        } catch (Exception e) {
+            Log.e ("kkk", "Exception ="+e);
+            return null;
+        }
+        return response;
     }
 }
