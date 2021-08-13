@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -31,7 +33,7 @@ import java.net.URL;
 
 import static android.content.ContentValues.TAG;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
 
     GoogleSignInClient mGoogleSignInClient;
     private final int RC_SIGN_IN = 123;
@@ -39,6 +41,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     SignInButton googleSignBt;
     private Button fakeGoogle;
     Button logoutBt, toTheMainBt;
+    TextView tempoTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,10 +59,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         toTheMainBt = (Button) findViewById(R.id.ToTheMainButton);
         toTheMainBt.setOnClickListener(this);
 
+        tempoTextView = (TextView) findViewById(R.id.hellotextview);
+
         // 앱에 필요한 사용자 데이터를 요청하도록 로그인 옵션을 설정한다.
 // DEFAULT_SIGN_IN parameter는 유저의 ID와 기본적인 프로필 정보를 요청하는데 사용된다.
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken("1055755332536-5ecrjokk429a4eb7cbk0sqmq9qa6mo80.apps.googleusercontent.com")
+//                .requestIdToken("1055755332536-5ecrjokk429a4eb7cbk0sqmq9qa6mo80.apps.googleusercontent.com")
+//                      바로 위에 문장 주석 풀면 handlesigninresult에서 apiexpection 발생한다.
                 .requestEmail() // email addresses도 요청함
                 .build();
 
@@ -100,7 +106,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void signIn() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-        startActivityForResult(signInIntent, RC_SIGN_IN);
+        startActivityForResult(signInIntent, RC_SIGN_IN);;
     }
 
     @Override
@@ -111,6 +117,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if (requestCode == RC_SIGN_IN) {
             // The Task returned from this call is always completed, no need to attach
             // a listener.
+
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             handleSignInResult(task);
         }
@@ -144,7 +151,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
             Log.w(TAG, "signInResult:failed code=" + e.getStatusCode());
-//            updateUI(null);
+            e.printStackTrace();
 
         }
     }
@@ -174,8 +181,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         try {
             URL url = new URL(ServerURL);
             conn = (HttpURLConnection)url.openConnection();
-            conn.setConnectTimeout(5 * 1000);
-            conn.setReadTimeout(5 * 1000);
+//            conn.setConnectTimeout(5 * 1000);
+//            conn.setReadTimeout(5 * 1000);
             conn.setRequestMethod("POST");
             conn.setRequestProperty("Cache-Control", "no-cache");
             conn.setRequestProperty("Content-Type", "application/json");
