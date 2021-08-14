@@ -1,7 +1,9 @@
 package com.cname.nada;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,6 +13,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.cname.nada.functions.RequestHttpURLConnection;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -19,7 +22,9 @@ import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 
+import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 import org.json.JSONStringer;
 
 import java.io.ByteArrayOutputStream;
@@ -42,6 +47,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private Button fakeGoogle;
     Button logoutBt, toTheMainBt;
     TextView tempoTextView;
+    String url1 = "http://ec2-3-37-249-141.ap-northeast-2.compute.amazonaws.com:8080/user/login/google";
+    String personToken, personName, personGivenName, personFamilyName, personEmail, personId;
+    Uri personPhoto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -128,13 +136,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             GoogleSignInAccount acct = completedTask.getResult(ApiException.class);
 
             if (acct != null) {
-                String personToken = acct.getIdToken();
-                String personName = acct.getDisplayName();
-                String personGivenName = acct.getGivenName();
-                String personFamilyName = acct.getFamilyName();
-                String personEmail = acct.getEmail();
-                String personId = acct.getId();
-                Uri personPhoto = acct.getPhotoUrl();
+                personToken = acct.getIdToken();
+                personName = acct.getDisplayName();
+                personGivenName = acct.getGivenName();
+                personFamilyName = acct.getFamilyName();
+                personEmail = acct.getEmail();
+                personId = acct.getId();
+                personPhoto = acct.getPhotoUrl();
 
                 Log.d(TAG, "handleSignInResult:personName "+personName);
                 Log.d(TAG, "handleSignInResult:personGivenName "+personGivenName);
@@ -143,10 +151,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 Log.d(TAG, "handleSignInResult:personFamilyName "+personFamilyName);
                 Log.d(TAG, "handleSignInResult:personPhoto "+personPhoto);
 
-                sendJsonDataToServer(makeJsonMsg(personName, personEmail),
-                        "http://ec2-3-37-249-141.ap-northeast-2.compute.amazonaws.com:8080/user/login/google");
+                SendUserInfo sendUserInfo = new SendUserInfo();
+                sendUserInfo.execute();
+
             }
-//            updateUI(acct);
         } catch (ApiException e) {
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
@@ -155,6 +163,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         }
     }
+
 
     private static String makeJsonMsg(String name, String email) {
         String retMsg = "";
@@ -181,8 +190,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         try {
             URL url = new URL(ServerURL);
             conn = (HttpURLConnection)url.openConnection();
-//            conn.setConnectTimeout(5 * 1000);
-//            conn.setReadTimeout(5 * 1000);
+            conn.setConnectTimeout(5 * 1000);
+            conn.setReadTimeout(5 * 1000);
             conn.setRequestMethod("POST");
             conn.setRequestProperty("Cache-Control", "no-cache");
             conn.setRequestProperty("Content-Type", "application/json");
@@ -222,5 +231,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             return null;
         }
         return response;
+    }
+
+    private class SendUserInfo extends AsyncTask<String, String, String> implements com.cname.nada.sendUserInfo {
+
+        @Override
+        protected String doInBackground(String... strings) {
+            String result = sendJsonDataToServer(makeJsonMsg(personName, personEmail), url1);
+            return result;
+        }
     }
 }
