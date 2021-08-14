@@ -1,5 +1,6 @@
 package com.cname.nada;
 
+import android.content.AsyncQueryHandler;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.net.Uri;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.loader.content.AsyncTaskLoader;
 
 import com.cname.nada.functions.RequestHttpURLConnection;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -27,11 +29,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONStringer;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -48,7 +53,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     Button logoutBt, toTheMainBt;
     TextView tempoTextView;
     String url1 = "http://ec2-3-37-249-141.ap-northeast-2.compute.amazonaws.com:8080/user/login/google";
-    String personToken, personName, personGivenName, personFamilyName, personEmail, personId;
+    String personToken, personName, personGivenName, personFamilyName, personEmail, personId, statement;
     Uri personPhoto;
 
     @Override
@@ -151,9 +156,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 Log.d(TAG, "handleSignInResult:personFamilyName "+personFamilyName);
                 Log.d(TAG, "handleSignInResult:personPhoto "+personPhoto);
 
-                SendUserInfo sendUserInfo = new SendUserInfo();
-                sendUserInfo.execute();
+//                SendUserInfo sendUserInfo = new SendUserInfo();
+//                sendUserInfo.execute();
 
+//                SendJsonDataToServer sendJsonDataToServer= new SendJsonDataToServer();
+//                sendJsonDataToServer.start();
+
+                AsyncTask<String, String, String> result = new SendJsonDataToServer().execute(url1);
             }
         } catch (ApiException e) {
             // The ApiException status code indicates the detailed failure reason.
@@ -180,65 +189,261 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         return retMsg;
     }
 
-    static public String sendJsonDataToServer(String JsonMsg, String ServerURL) {
-        OutputStream os = null;
-        InputStream is = null;
-        ByteArrayOutputStream baos = null;
-        HttpURLConnection conn = null;
-        String response="";
+//    static public String sendJsonDataToServer(String JsonMsg, String ServerURL) {
+//        OutputStream os = null;
+//        InputStream is = null;
+//        ByteArrayOutputStream baos = null;
+//        HttpURLConnection conn = null;
+//        String response="";
+//
+//        try {
+//            URL url = new URL(ServerURL);
+//            conn = (HttpURLConnection)url.openConnection();
+//            conn.setConnectTimeout(5 * 1000);
+//            conn.setReadTimeout(5 * 1000);
+//            conn.setRequestMethod("POST");
+//            conn.setRequestProperty("Cache-Control", "no-cache");
+//            conn.setRequestProperty("Content-Type", "application/json");
+//            conn.setRequestProperty("Accept", "application/json");
+//            conn.setDoOutput(true);
+//            conn.setDoInput(true);
 
-        try {
-            URL url = new URL(ServerURL);
-            conn = (HttpURLConnection)url.openConnection();
-            conn.setConnectTimeout(5 * 1000);
-            conn.setReadTimeout(5 * 1000);
-            conn.setRequestMethod("POST");
-            conn.setRequestProperty("Cache-Control", "no-cache");
-            conn.setRequestProperty("Content-Type", "application/json");
-            conn.setRequestProperty("Accept", "application/json");
-            conn.setDoOutput(true);
-            conn.setDoInput(true);
+//
+//            os = conn.getOutputStream();
+//            os.write(JsonMsg.getBytes());
+//            os.flush();
+//            int responseCode = conn.getResponseCode();
+//
+//            if (responseCode == HttpURLConnection.HTTP_OK) {
+//                is = conn.getInputStream();
+//                baos = new ByteArrayOutputStream();
+//                byte[] byteBuffer = new byte[1024];
+//                byte[] byteData = null;
+//                int nLength = 0;
+//                while((nLength = is.read(byteBuffer, 0, byteBuffer.length)) != -1) {
+//                    baos.write(byteBuffer, 0, nLength);
+//                }
+//                byteData = baos.toByteArray();
+//                response = new String(byteData);
+//
+//                Log.i(TAG, "DATA response = " + response);
+//            }
+//        } catch (MalformedURLException e) {
+//            // TODO Auto-generated catch block
+//            e.printStackTrace();
+//            return null;
+//        } catch (IOException e) {
+//            // TODO Auto-generated catch block
+//            e.printStackTrace();
+//            return null;
+//        } catch (Exception e) {
+//            Log.e ("kkk", "Exception ="+e);
+//            return null;
+//        }
+//        return response;
+//    }
 
-            os = conn.getOutputStream();
-            os.write(JsonMsg.getBytes());
-            os.flush();
-            int responseCode = conn.getResponseCode();
+//    private class SendUserInfo extends AsyncTask<String, String, String> implements com.cname.nada.sendUserInfo {
+//
+//        @Override
+//        protected String doInBackground(String... strings) {
+//            sendJsonDataToServer(makeJsonMsg(personName, personEmail), url1);
+//            return null;
+//        }
+//    }
 
-            if (responseCode == HttpURLConnection.HTTP_OK) {
-                is = conn.getInputStream();
-                baos = new ByteArrayOutputStream();
-                byte[] byteBuffer = new byte[1024];
-                byte[] byteData = null;
-                int nLength = 0;
-                while((nLength = is.read(byteBuffer, 0, byteBuffer.length)) != -1) {
-                    baos.write(byteBuffer, 0, nLength);
-                }
-                byteData = baos.toByteArray();
-                response = new String(byteData);
-
-                Log.i(TAG, "DATA response = " + response);
-            }
-        } catch (MalformedURLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-            return null;
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-            return null;
-        } catch (Exception e) {
-            Log.e ("kkk", "Exception ="+e);
-            return null;
-        }
-        return response;
-    }
-
-    private class SendUserInfo extends AsyncTask<String, String, String> implements com.cname.nada.sendUserInfo {
+    public class SendJsonDataToServer extends AsyncTask<String, String, String> {
 
         @Override
-        protected String doInBackground(String... strings) {
-            String result = sendJsonDataToServer(makeJsonMsg(personName, personEmail), url1);
-            return result;
+        protected String doInBackground(String... urls) {
+            try {
+                String JsonMsg = makeJsonMsg(personName, personEmail);
+
+                OutputStream os = null;
+                InputStream is = null;
+                ByteArrayOutputStream baos = null;
+                HttpURLConnection conn = null;
+                String response = "";
+
+                try {
+                    URL url = new URL(urls[0]);
+                    conn = (HttpURLConnection)url.openConnection();
+                    conn.setConnectTimeout(5 * 1000);
+                    conn.setReadTimeout(5 * 1000);
+                    conn.setRequestMethod("POST");
+                    conn.setRequestProperty("Cache-Control", "no-cache");
+                    conn.setRequestProperty("Content-Type", "application/json");
+                    conn.setRequestProperty("Accept", "application/json");
+                    conn.setDoOutput(true);
+                    conn.setDoInput(true);
+
+                    os = conn.getOutputStream();
+                    os.write(JsonMsg.getBytes());
+                    os.flush();
+                    int responseCode = conn.getResponseCode();
+
+                    if (responseCode == HttpURLConnection.HTTP_OK) {
+                        is = conn.getInputStream();
+                        baos = new ByteArrayOutputStream();
+                        byte[] byteBuffer = new byte[1024];
+                        byte[] byteData = null;
+                        int nLength = 0;
+                        while ((nLength = is.read(byteBuffer, 0, byteBuffer.length)) != -1) {
+                            baos.write(byteBuffer, 0, nLength);
+                        }
+                        byteData = baos.toByteArray();
+                        response = new String(byteData);
+
+                        Log.i(TAG, "DATA response = " + response);
+                    }
+                    return response;
+                } catch (MalformedURLException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                    return null;
+                } catch (IOException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                    return null;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            tempoTextView.setText(statement);
         }
     }
+
+//    public class SendJsonDataToServer extends AsyncTask<String, String, String> {
+//
+//        @Override
+//        protected String doInBackground(String... urls) {
+//            try {
+//                //JSONObject를 만들고 key value 형식으로 값을 저장해준다.
+//                JSONObject jsonObject = new JSONObject();
+//                jsonObject.accumulate("name", personName);
+//                jsonObject.accumulate("email", personEmail);
+//                HttpURLConnection con = null;
+//                BufferedReader reader = null;
+//
+//                try{
+//                    URL url = new URL(urls[0]);
+//                    //연결을 함
+//                    con = (HttpURLConnection) url.openConnection();
+//                    con.setRequestMethod("POST");//POST방식으로 보냄
+//                    con.setRequestProperty("Cache-Control", "no-cache");
+//                    con.setRequestProperty("Content-Type", "application/json");
+//                    con.setRequestProperty("Accept", "text/html");
+//                    con.setDoOutput(true);//Outstream으로 post 데이터를 넘겨주겠다는 의미
+//                    con.setDoInput(true);//Inputstream으로 서버로부터 응답을 받겠다는 의미
+//
+//                    //서버로 보내기위해서 스트림 만듬
+//                    OutputStream outStream = con.getOutputStream();
+//                    statement = "여기까지 됨.";
+//                    //버퍼를 생성하고 넣음
+//                    BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(outStream));
+//                    writer.write(jsonObject.toString());
+//                    writer.flush();
+//                    writer.close();//버퍼를 받아줌
+//
+//                    //서버로 부터 데이터를 받음
+//                    InputStream stream = con.getInputStream();
+//                    reader = new BufferedReader(new InputStreamReader(stream));
+//                    StringBuffer buffer = new StringBuffer();
+//                    String line = "";
+//
+//                    while((line = reader.readLine()) != null){
+//                        buffer.append(line);
+//                    }
+//                    return buffer.toString();//서버로 부터 받은 값을 리턴해줌 아마 OK!!가 들어올것임
+//                } catch (MalformedURLException e){
+//                    e.printStackTrace();
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                } finally {
+//                    if(con != null){
+//                        con.disconnect();
+//                    }
+//                    try {
+//                        if(reader != null){
+//                            reader.close();//버퍼를 닫아줌
+//                        }
+//                    } catch (IOException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//            return null;
+//        }
+//
+//        @Override
+//        protected void onPostExecute(String result) {
+//            super.onPostExecute(result);
+//            tempoTextView.setText(statement);
+//        }
+//    }
+
+//    class SendJsonDataToServer extends Thread {
+//
+//        @Override
+//        public void run() {
+//            try {
+//                String JsonMsg = makeJsonMsg(personName, personEmail);
+//
+//                OutputStream os = null;
+//                InputStream is = null;
+//                ByteArrayOutputStream baos = null;
+//                HttpURLConnection conn = null;
+//                String response = "";
+//
+//                try {
+//                    URL url = new URL(url1);
+//                    conn = (HttpURLConnection) url.openConnection();
+//                    conn.setConnectTimeout(5 * 1000);
+//                    conn.setReadTimeout(5 * 1000);
+//                    conn.setRequestMethod("POST");
+//                    conn.setRequestProperty("Cache-Control", "no-cache");
+//                    conn.setRequestProperty("Content-Type", "application/json");
+//                    conn.setRequestProperty("Accept", "application/json");
+//                    conn.setDoOutput(true);
+//                    conn.setDoInput(true);
+//
+//                    os = conn.getOutputStream();
+//                    os.write(JsonMsg.getBytes());
+//                    os.flush();
+//                    int responseCode = conn.getResponseCode();
+//
+//                    if (responseCode == HttpURLConnection.HTTP_OK) {
+//                        is = conn.getInputStream();
+//                        baos = new ByteArrayOutputStream();
+//                        byte[] byteBuffer = new byte[1024];
+//                        byte[] byteData = null;
+//                        int nLength = 0;
+//                        while ((nLength = is.read(byteBuffer, 0, byteBuffer.length)) != -1) {
+//                            baos.write(byteBuffer, 0, nLength);
+//                        }
+//                        byteData = baos.toByteArray();
+//                        response = new String(byteData);
+//
+//                        Log.i(TAG, "DATA response = " + response);
+//                    }
+//                } catch (MalformedURLException e) {
+//                    // TODO Auto-generated catch block
+//                    e.printStackTrace();
+//                } catch (IOException e) {
+//                    // TODO Auto-generated catch block
+//                    e.printStackTrace();
+//                }
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//        }
+//    }
 }
