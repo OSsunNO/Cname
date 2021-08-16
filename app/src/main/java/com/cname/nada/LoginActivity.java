@@ -1,10 +1,7 @@
 package com.cname.nada;
 
-import android.content.AsyncQueryHandler;
-import android.content.ContentValues;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -13,9 +10,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.loader.content.AsyncTaskLoader;
 
-import com.cname.nada.functions.RequestHttpURLConnection;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -24,37 +25,26 @@ import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONStringer;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-
-import static android.content.ContentValues.TAG;
+import java.util.HashMap;
+import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
 
     GoogleSignInClient mGoogleSignInClient;
     private final int RC_SIGN_IN = 123;
-    private static final String TAG = "LoginActivity";
+    private final String TAG = this.getClass().getSimpleName();
     SignInButton googleSignBt;
     private Button fakeGoogle;
     Button logoutBt, toTheMainBt;
     TextView tempoTextView;
-    String url1 = "http://ec2-3-37-249-141.ap-northeast-2.compute.amazonaws.com:8080/user/login/google";
+    String url1 = "http://ec2-3-37-249-141.ap-northeast-2.compute.amazonaws.com:8080/user/login/google/";
     String personToken, personName, personGivenName, personFamilyName, personEmail, personId, statement;
     Uri personPhoto;
+    JSONObject id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -133,6 +123,49 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             handleSignInResult(task);
+
+            Map<String, String> post_json = new HashMap<>();
+            post_json.put("name", personName);
+            post_json.put("email", personEmail);
+
+            final JSONObject parameter = (JSONObject) new JSONObject(post_json);
+
+            RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
+
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url1, parameter,
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            Toast toast = Toast.makeText(getApplicationContext(), "유저 정보가 서버로 전송되었습니다.", Toast.LENGTH_LONG);
+                            toast.show();
+
+                            id = response;
+                            try {
+                                tempoTextView.setText("id는" + id.get("id").toString());
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                                tempoTextView.setText("id 못가져옴");
+                            }
+
+                            Log.d(TAG, "Post success : " + parameter);
+
+                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(intent);
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Toast toast = Toast.makeText(getApplicationContext(), "유저 정보가 정상적으로 전송되지 않습니다.", Toast.LENGTH_LONG);
+                            toast.show();
+
+                            error.printStackTrace();
+                            Log.d(TAG, "Post Fail");
+                        }
+                    });
+
+            queue.add(jsonObjectRequest);
         }
     }
 
@@ -162,7 +195,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 //                SendJsonDataToServer sendJsonDataToServer= new SendJsonDataToServer();
 //                sendJsonDataToServer.start();
 
-                AsyncTask<String, String, String> result = new SendJsonDataToServer().execute(url1);
+//                AsyncTask<String, String, String> result = new SendJsonDataToServer().execute(url1);
             }
         } catch (ApiException e) {
             // The ApiException status code indicates the detailed failure reason.
@@ -173,8 +206,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
-
-    private static String makeJsonMsg(String name, String email) {
+    private String makeJsonMsg(String name, String email) {
         String retMsg = "";
 
         JSONStringer jsonStringer = new JSONStringer();
@@ -187,72 +219,5 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             e.printStackTrace();
         }
         return retMsg;
-    }
-
-    public class SendJsonDataToServer extends AsyncTask<String, String, String> {
-
-        @Override
-        protected String doInBackground(String... urls) {
-            try {
-                String JsonMsg = makeJsonMsg(personName, personEmail);
-
-                OutputStream os = null;
-                InputStream is = null;
-                ByteArrayOutputStream baos = null;
-                HttpURLConnection conn = null;
-                String response = "";
-
-                try {
-                    URL url = new URL(urls[0]);
-                    conn = (HttpURLConnection)url.openConnection();
-                    conn.setConnectTimeout(5 * 1000);
-                    conn.setReadTimeout(5 * 1000);
-                    conn.setRequestMethod("POST");
-                    conn.setRequestProperty("Cache-Control", "no-cache");
-                    conn.setRequestProperty("Content-Type", "application/json");
-                    conn.setRequestProperty("Accept", "application/json");
-                    conn.setDoOutput(true);
-                    conn.setDoInput(true);
-
-                    os = conn.getOutputStream();
-                    os.write(JsonMsg.getBytes());
-                    os.flush();
-                    int responseCode = conn.getResponseCode();
-
-                    if (responseCode == HttpURLConnection.HTTP_OK) {
-                        is = conn.getInputStream();
-                        baos = new ByteArrayOutputStream();
-                        byte[] byteBuffer = new byte[1024];
-                        byte[] byteData = null;
-                        int nLength = 0;
-                        while ((nLength = is.read(byteBuffer, 0, byteBuffer.length)) != -1) {
-                            baos.write(byteBuffer, 0, nLength);
-                        }
-                        byteData = baos.toByteArray();
-                        response = new String(byteData);
-
-                        Log.i(TAG, "DATA response = " + response);
-                    }
-                    return response;
-                } catch (MalformedURLException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                    return null;
-                } catch (IOException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                    return null;
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            super.onPostExecute(result);
-            tempoTextView.setText(statement);
-        }
     }
 }
