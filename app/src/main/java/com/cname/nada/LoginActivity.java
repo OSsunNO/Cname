@@ -1,5 +1,6 @@
 package com.cname.nada;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -17,18 +18,22 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.cname.nada.functions.UserID;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.Task;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.json.JSONStringer;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -42,9 +47,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     Button logoutBt, toTheMainBt;
     TextView tempoTextView;
     String url1 = "http://ec2-3-37-249-141.ap-northeast-2.compute.amazonaws.com:8080/user/login/google/";
-    String personToken, personName, personGivenName, personFamilyName, personEmail, personId, statement;
+    String personToken, personName, personGivenName, personFamilyName, personEmail, personId;
     Uri personPhoto;
-    JSONObject id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +68,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         tempoTextView = (TextView) findViewById(R.id.hellotextview);
 
+        // [START configure_signin]
         // 앱에 필요한 사용자 데이터를 요청하도록 로그인 옵션을 설정한다.
 // DEFAULT_SIGN_IN parameter는 유저의 ID와 기본적인 프로필 정보를 요청하는데 사용된다.
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -71,18 +76,19 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 //                      바로 위에 문장 주석 풀면 handlesigninresult에서 apiexpection 발생한다.
                 .requestEmail() // email addresses도 요청함
                 .build();
+        // [END configure_signin]
 
 // 위에서 만든 GoogleSignInOptions을 사용해 GoogleSignInClient 객체를 만듬
         mGoogleSignInClient = GoogleSignIn.getClient(LoginActivity.this, gso);
 
-        // 기존 로그인 계정 확인
-        GoogleSignInAccount gsa = GoogleSignIn.getLastSignedInAccount(LoginActivity.this);
+//        googleSignBt.setScopes(gso.getScopeArray());
 
-        // 로그인 되어있을때
-        if (gsa != null && gsa.getId() != null) {
-//            updateUI(acct);
-        }
-
+        mGoogleSignInClient.signOut()
+                .addOnCompleteListener(this, task -> {
+                    Log.d(TAG, "onClick:logout success ");
+                    mGoogleSignInClient.revokeAccess()
+                            .addOnCompleteListener(this, task1 -> Log.d(TAG, "onClick:revokeAccess success "));
+                });
     }
 
     @Override
@@ -139,12 +145,19 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             Toast toast = Toast.makeText(getApplicationContext(), "유저 정보가 서버로 전송되었습니다.", Toast.LENGTH_LONG);
                             toast.show();
 
-                            id = response;
                             try {
-                                tempoTextView.setText("id는" + id.get("id").toString());
+                                FileOutputStream outputStream = openFileOutput("userId.txt", Context.MODE_PRIVATE);
+                                outputStream.write(response.get("id").toString().getBytes());
+                                outputStream.close();
+                            } catch (FileNotFoundException e) {
+                                e.printStackTrace();
+                            } catch (IOException | JSONException e) {
+                                e.printStackTrace();
+                            }
+                            try {
+                                UserID.setUserId(response.get("id").toString());
                             } catch (JSONException e) {
                                 e.printStackTrace();
-                                tempoTextView.setText("id 못가져옴");
                             }
 
                             Log.d(TAG, "Post success : " + parameter);
@@ -169,9 +182,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
-    private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
+     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
         try {
-            GoogleSignInAccount acct = completedTask.getResult(ApiException.class);
+                GoogleSignInAccount acct = completedTask.getResult(ApiException.class);
 
             if (acct != null) {
                 personToken = acct.getIdToken();
@@ -182,12 +195,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 personId = acct.getId();
                 personPhoto = acct.getPhotoUrl();
 
-                Log.d(TAG, "handleSignInResult:personName "+personName);
-                Log.d(TAG, "handleSignInResult:personGivenName "+personGivenName);
-                Log.d(TAG, "handleSignInResult:personEmail "+personEmail);
-                Log.d(TAG, "handleSignInResult:personId "+personId);
-                Log.d(TAG, "handleSignInResult:personFamilyName "+personFamilyName);
-                Log.d(TAG, "handleSignInResult:personPhoto "+personPhoto);
+                Log.d(TAG, "handleSignInResult:personName " + personName);
+                Log.d(TAG, "handleSignInResult:personGivenName " + personGivenName);
+                Log.d(TAG, "handleSignInResult:personEmail " + personEmail);
+                Log.d(TAG, "handleSignInResult:personId " + personId);
+                Log.d(TAG, "handleSignInResult:personFamilyName " + personFamilyName);
+                Log.d(TAG, "handleSignInResult:personPhoto " + personPhoto);
 
 //                SendUserInfo sendUserInfo = new SendUserInfo();
 //                sendUserInfo.execute();
@@ -204,20 +217,5 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             e.printStackTrace();
 
         }
-    }
-
-    private String makeJsonMsg(String name, String email) {
-        String retMsg = "";
-
-        JSONStringer jsonStringer = new JSONStringer();
-
-        try {
-            retMsg = jsonStringer.object().key("name").value(name).key("email").value(email).endObject().toString();
-            Log.d (TAG, "send string = " + retMsg);
-        } catch (JSONException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        return retMsg;
     }
 }

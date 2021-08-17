@@ -1,6 +1,7 @@
 package com.cname.nada;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -10,26 +11,41 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.PopupMenu;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+
+import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 
-public class Frag4 extends Fragment {
+public class Frag4 extends Fragment implements View.OnClickListener {
+    GoogleSignInClient mGoogleSignInClient;
+    private final String TAG = this.getClass().getSimpleName();
     private View view;
-    private Button changeStartFragBtn;
+    private Button changeStartFragBtn, loginOutBtn;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.frag4, container, false);
         changeStartFragBtn = (Button) view.findViewById(R.id.changeFragNumButton);
-        changeStartFragBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        loginOutBtn = (Button) view.findViewById(R.id.logoutButton);
+
+        changeStartFragBtn.setOnClickListener(this);
+        loginOutBtn.setOnClickListener(this);
+
+        return view;
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.changeFragNumButton:
                 PopupMenu popup = new PopupMenu(getContext(), v);
                 MenuInflater inflater = popup.getMenuInflater();
                 Menu menu = popup.getMenu();
@@ -64,8 +80,20 @@ public class Frag4 extends Fragment {
                     }
                 });
                 popup.show();
-            }
-        });
-        return view;
+                break;
+            case R.id.logoutButton:
+                File file = new File("/data/data/com.cname.nada/files/userId.txt");
+                // 파일이 존재하는지 체크
+                if(file.exists()) {
+                    file.delete();
+                } else {
+                    Toast.makeText(getContext(), "파일이 삭제되지 않았습니다.", Toast.LENGTH_SHORT).show();
+                }
+
+                Intent intent = new Intent(getContext(), LoginActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                break;
+        }
     }
 }

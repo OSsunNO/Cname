@@ -43,7 +43,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:contentDescription="@string/record"
-            android:src="@drawable/send_icon"
+            android:src="@drawable/icon_send"
             android:layout_marginTop="15dp"
             android:layout_marginRight="8dp"
             app:layout_constraintEnd_toStartOf="@+id/SettingBtn"

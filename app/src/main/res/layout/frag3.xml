@@ -27,7 +27,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
-        android:id="@+id/NameCard1"
+        android:id="@+id/tempoTextView"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         app:layout_constraintTop_toTopOf="parent"

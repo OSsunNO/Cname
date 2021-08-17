@@ -99,16 +99,4 @@
             android:textColor="@color/black0"
             />
 
-
 </androidx.constraintlayout.widget.ConstraintLayout>
-
-<!--
-<com.google.android.gms.common.SignInButton
-        android:id="@+id/GoogleLoginButton"
-        android:layout_width="match_parent"
-        android:layout_height="75dp"
-        android:layout_marginHorizontal="30dp"
-        android:layout_marginTop="90dp"
-        android:background="@drawable/login_custom"
-        app:layout_constraintTop_toBottomOf="@+id/Logo" />
--->
