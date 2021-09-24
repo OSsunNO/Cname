@@ -85,7 +85,7 @@
         android:textStyle="bold"
         android:layout_marginBottom="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:background="@drawable/bg_custom_button"
+        android:background="@drawable/custom_bg_button"
         />
 
         <TextView

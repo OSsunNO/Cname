@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.cname.nada">
 
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android:permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -15,7 +17,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".InitialUserInfoInputActivity"></activity>
+        <activity
+            android:name=".SignupInitialInfoActivity"
+            android:exported="true" />
+        <activity
+            android:name=".SignupStartActivity"
+            android:exported="true" />
+        <activity android:name=".InitialUserInfoInputActivity" />
         <activity android:name=".MyProfileEditPage" />
         <activity
             android:name=".SplashActivity"
@@ -31,10 +39,10 @@
             android:name=".MainActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".List_search"
+            android:name=".ListSearchActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Send"
+            android:name=".SendActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".List_settings"

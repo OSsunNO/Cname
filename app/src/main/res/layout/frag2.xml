@@ -31,7 +31,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:contentDescription="@string/search"
-            android:src="@drawable/search_icon"
+            android:src="@drawable/icon_search"
             android:layout_marginTop="15dp"
             android:layout_marginRight="8dp"
             app:layout_constraintEnd_toStartOf="@+id/SendBtn"
@@ -55,7 +55,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:contentDescription="@string/settings"
-            android:src="@drawable/settings_icon"
+            android:src="@drawable/icon_settings"
             android:layout_marginTop="15dp"
             android:layout_marginRight="18dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -81,7 +81,7 @@
                 android:layout_height="100dp"
                 android:layout_marginHorizontal="8dp"
                 android:layout_marginVertical="10dp"
-                android:background="@drawable/bg_custom_button"
+                android:background="@drawable/custom_bg_button"
                 app:layout_constraintTop_toTopOf="parent"></TextView>
 
             <TextView
@@ -90,7 +90,7 @@
                 android:layout_height="100dp"
                 android:layout_marginHorizontal="8dp"
                 android:layout_marginVertical="10dp"
-                android:background="@drawable/bg_custom_button"
+                android:background="@drawable/custom_bg_button"
                 app:layout_constraintTop_toBottomOf="@id/NameCard1"></TextView>
 
             <TextView
@@ -99,7 +99,7 @@
                 android:layout_height="100dp"
                 android:layout_marginHorizontal="8dp"
                 android:layout_marginVertical="10dp"
-                android:background="@drawable/bg_custom_button"
+                android:background="@drawable/custom_bg_button"
                 app:layout_constraintTop_toBottomOf="@id/NameCard2"></TextView>
 
             <TextView
@@ -108,7 +108,7 @@
                 android:layout_height="100dp"
                 android:layout_marginHorizontal="8dp"
                 android:layout_marginVertical="10dp"
-                android:background="@drawable/bg_custom_button"
+                android:background="@drawable/custom_bg_button"
                 app:layout_constraintTop_toBottomOf="@id/NameCard3"></TextView>
 
             <TextView
@@ -117,7 +117,7 @@
                 android:layout_height="100dp"
                 android:layout_marginHorizontal="8dp"
                 android:layout_marginVertical="10dp"
-                android:background="@drawable/bg_custom_button"
+                android:background="@drawable/custom_bg_button"
                 app:layout_constraintTop_toBottomOf="@id/NameCard4"></TextView>
 
             <TextView
@@ -126,7 +126,7 @@
                 android:layout_height="100dp"
                 android:layout_marginHorizontal="8dp"
                 android:layout_marginVertical="10dp"
-                android:background="@drawable/bg_custom_button"
+                android:background="@drawable/custom_bg_button"
                 app:layout_constraintTop_toBottomOf="@id/NameCard5"></TextView>
 
             <TextView
@@ -135,7 +135,7 @@
                 android:layout_height="100dp"
                 android:layout_marginHorizontal="8dp"
                 android:layout_marginVertical="10dp"
-                android:background="@drawable/bg_custom_button"
+                android:background="@drawable/custom_bg_button"
                 app:layout_constraintTop_toBottomOf="@id/NameCard6"
                 tools:layout_editor_absoluteX="0dp"></TextView>
 
@@ -145,7 +145,7 @@
                 android:layout_height="100dp"
                 android:layout_marginHorizontal="8dp"
                 android:layout_marginVertical="10dp"
-                android:background="@drawable/bg_custom_button"
+                android:background="@drawable/custom_bg_button"
                 app:layout_constraintTop_toBottomOf="@id/NameCard7"></TextView>
 
             <TextView
@@ -154,7 +154,7 @@
                 android:layout_height="100dp"
                 android:layout_marginHorizontal="8dp"
                 android:layout_marginVertical="10dp"
-                android:background="@drawable/bg_custom_button"
+                android:background="@drawable/custom_bg_button"
                 app:layout_constraintTop_toBottomOf="@id/NameCard8"></TextView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

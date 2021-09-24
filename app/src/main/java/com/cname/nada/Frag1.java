@@ -37,7 +37,7 @@ public class Frag1 extends Fragment {
         sendBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(),Send.class);
+                Intent intent = new Intent(getContext(), SendActivity.class);
                 startActivity(intent);
             }
         });

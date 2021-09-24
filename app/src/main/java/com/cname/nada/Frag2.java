@@ -33,7 +33,7 @@ public class Frag2 extends Fragment {
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(),List_search.class);
+                Intent intent = new Intent(getContext(), ListSearchActivity.class);
                 startActivity(intent);
             }
         });
@@ -41,7 +41,7 @@ public class Frag2 extends Fragment {
         sendBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(),Send.class);
+                Intent intent = new Intent(getContext(), SendActivity.class);
                 startActivity(intent);
             }
         });

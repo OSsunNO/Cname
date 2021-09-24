@@ -162,9 +162,19 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                             Log.d(TAG, "Post success : " + parameter);
 
-                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                            startActivity(intent);
+//                            try {
+//                                if(response.get("result").toString().equals("true")) {
+                                    Intent intent = new Intent(LoginActivity.this, SignupInitialInfoActivity.class);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                    startActivity(intent);
+//                                } else {
+//                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+//                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                                    startActivity(intent);
+//                                }
+//                            } catch (JSONException e) {
+//                                e.printStackTrace();
+//                            }
                         }
                     },
                     new Response.ErrorListener() {
