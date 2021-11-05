@@ -35,12 +35,18 @@ public class SendActivity extends AppCompatActivity {
     private ImageView returnBtn;
 
     //시간 받아오기
-    private String getTime() {
+    private long getTime() {
+        long realTime = 0;
         long now = System.currentTimeMillis();
         Date date = new Date(now);
         SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm:ss");
         String getTime = dateFormat.format(date);
-        return getTime;
+
+        String[] timeArr = getTime.split(":");
+        for (int i=0; i<3; i++){
+            realTime += (long) Math.pow(60,2-i) * Long.parseLong(timeArr[i]);
+        }
+        return realTime;
     }
 
 
@@ -74,13 +80,13 @@ public class SendActivity extends AppCompatActivity {
         }
 
         final TextView textview_address = (TextView)findViewById(R.id.textview);
-        textview_address.setText(getTime());
+        textview_address.setText(String.valueOf(getTime()));
         Button ShowLocationButton = (Button) findViewById(R.id.button);
         ShowLocationButton.setOnClickListener(new View.OnClickListener(){
 
             public void onClick(View arg0){
                 if (arg0.getId()==R.id.button){
-                    textview_address.setText(getTime());
+                    textview_address.setText((int) getTime());
                 }
 
                 gpsTracker = new GpsTracker(SendActivity.this);
