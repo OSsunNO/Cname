@@ -12,4 +12,5 @@
         app:font="@font/noto_sans_cjkkr_regular"
         app:fontStyle="normal"
         app:fontWeight="500" />
+
 </font-family>
