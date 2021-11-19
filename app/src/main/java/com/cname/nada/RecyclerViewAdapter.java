@@ -15,15 +15,37 @@ import java.util.ArrayList;
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
     private ArrayList<ArrayList<String>> mData = null;
+    private OnItemClickListener mListener = null;
+
+    public interface OnItemClickListener {
+        void onItemClick(View v, int pos, String userId);
+    }
+
+    public void setOnItemClickListener (OnItemClickListener listener) {
+        this.mListener = listener;
+    }
 
     // 아이템 뷰를 저장하는 뷰홀더 클래스.
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imageViewProfile;
         TextView textViewName;
         TextView textViewPosition;
+        String userId;
 
         ViewHolder(View itemView) {
             super(itemView);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int pos = getAdapterPosition();
+                    if (pos != RecyclerView.NO_POSITION) {
+                        if(mListener != null) {
+                            mListener.onItemClick(v, pos, userId);
+                        }
+                    }
+                }
+            });
 
             // 뷰 객체에 대한 참조. (hold strong reference)
             imageViewProfile = itemView.findViewById(R.id.profile_image);
@@ -52,8 +74,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     // onBindViewHolder() - position에 해당하는 데이터를 뷰홀더의 아이템뷰에 표시.
     @Override
     public void onBindViewHolder(RecyclerViewAdapter.ViewHolder holder, int position) {
-        String nameOfFriend = mData.get(position).get(0);
-        String positionOfFriend = mData.get(position).get(1);
+        holder.userId = mData.get(position).get(0);
+        String nameOfFriend = mData.get(position).get(1);
+        String positionOfFriend = mData.get(position).get(2);
         holder.textViewName.setText(nameOfFriend);
         holder.textViewPosition.setText(positionOfFriend);
     }

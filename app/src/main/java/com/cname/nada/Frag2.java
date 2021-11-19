@@ -17,6 +17,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.cname.nada.functions.CurrentFriendID;
+
 import java.util.ArrayList;
 
 public class Frag2 extends Fragment {
@@ -34,6 +36,7 @@ public class Frag2 extends Fragment {
         ArrayList<ArrayList<String>> list = new ArrayList<>();
         for (int i=0; i<100; i++) {
             ArrayList<String> innerList = new ArrayList<>();
+            innerList.add(String.format("&d", i));
             innerList.add(String.format("name %d", i));
             innerList.add(String.format("position %d", i));
             list.add(innerList);
@@ -43,9 +46,18 @@ public class Frag2 extends Fragment {
         RecyclerView recyclerView = view.findViewById(R.id.recycler1);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        // 리사이클러뷰에 SimpleTextAdapter 객체 지정.
+        // 리사이클러뷰에 RecyclerViewAdapter 객체 지정.
         RecyclerViewAdapter adapter = new RecyclerViewAdapter(list);
         recyclerView.setAdapter(adapter);
+
+        adapter.setOnItemClickListener(new RecyclerViewAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View v, int pos, String userId) {
+                CurrentFriendID.setFriendId(userId);
+                Intent intent = new Intent(getContext(), FriendPageActivity.class);
+                startActivity(intent);
+            }
+        });
 
         searchBtn = (ImageView) view.findViewById(R.id.SearchBtn);
         sendBtn = (ImageView) view.findViewById(R.id.SendBtn);

@@ -18,6 +18,9 @@
         android:theme="@style/Theme.AppCompat.NoActionBar"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".FriendPageActivity"
+            android:exported="true" />
+        <activity
             android:name=".SignupInitialInfoActivity"
             android:exported="true" />
         <activity
