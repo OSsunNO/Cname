@@ -1,4 +1,4 @@
-package com.cname.nada;
+package com.cname.nada.functions;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,7 +9,8 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.lang.reflect.Array;
+import com.cname.nada.R;
+
 import java.util.ArrayList;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
@@ -29,6 +30,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imageViewProfile;
         TextView textViewName;
+        TextView textViewBelong;
         TextView textViewPosition;
         String userId;
 
@@ -50,12 +52,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             // 뷰 객체에 대한 참조. (hold strong reference)
             imageViewProfile = itemView.findViewById(R.id.profile_image);
             textViewName = itemView.findViewById(R.id.name);
+            textViewBelong = itemView.findViewById(R.id.belong);
             textViewPosition = itemView.findViewById(R.id.position);
         }
     }
 
     // 생성자에서 데이터 리스트 객체를 전달받음.
-    RecyclerViewAdapter(ArrayList<ArrayList<String>> list) {
+    public RecyclerViewAdapter(ArrayList<ArrayList<String>> list) {
         mData = list;
     }
 
@@ -76,8 +79,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public void onBindViewHolder(RecyclerViewAdapter.ViewHolder holder, int position) {
         holder.userId = mData.get(position).get(0);
         String nameOfFriend = mData.get(position).get(1);
-        String positionOfFriend = mData.get(position).get(2);
+        String belongOfFriend = mData.get(position).get(2);
+        String positionOfFriend = mData.get(position).get(3);
         holder.textViewName.setText(nameOfFriend);
+        holder.textViewBelong.setText(belongOfFriend);
         holder.textViewPosition.setText(positionOfFriend);
     }
 

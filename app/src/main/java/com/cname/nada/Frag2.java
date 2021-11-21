@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.cname.nada.functions.CurrentFriendID;
+import com.cname.nada.functions.RecyclerViewAdapter;
 
 import java.util.ArrayList;
 
@@ -38,6 +39,7 @@ public class Frag2 extends Fragment {
             ArrayList<String> innerList = new ArrayList<>();
             innerList.add(String.format("&d", i));
             innerList.add(String.format("name %d", i));
+            innerList.add(String.format("belong %d", i));
             innerList.add(String.format("position %d", i));
             list.add(innerList);
         }

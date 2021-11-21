@@ -2,7 +2,6 @@ package com.cname.nada;
 
 import android.Manifest;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -10,7 +9,6 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.os.Handler;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
@@ -21,25 +19,28 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.cname.nada.functions.GpsTracker;
 import com.cname.nada.functions.UserID;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -49,6 +50,7 @@ public class SendActivity extends AppCompatActivity {
     private ImageView returnBtn;
     String url1 = "http://ec2-3-37-249-141.ap-northeast-2.compute.amazonaws.com:8080/exchange/card/" + UserID.getUserId() + "/";
     private final String TAG = this.getClass().getSimpleName();
+    private RecyclerView recyclerView;
 
     //시간 받아오기
     private long getTime() {
@@ -78,7 +80,11 @@ public class SendActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_send);
 
+        recyclerView = findViewById(R.id.recycler1);
         returnBtn = findViewById(R.id.ReturnBtn);
+
+        recyclerView.setVisibility(View.GONE);
+
         returnBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) { finish(); }
@@ -97,25 +103,25 @@ public class SendActivity extends AppCompatActivity {
         double latitude = gpsTracker.getLatitude();
         double longitude = gpsTracker.getLongitude();
 
-        JSONObject parameter = new JSONObject();
+        JSONObject params = new JSONObject() {
+        };
         try {
-            parameter.put("getTime", getTimeAmount);
-            parameter.put("latitude", latitude);
-            parameter.put("longitude", longitude);
+            params.put("get_time", getTimeAmount);
+            params.put("latitude", latitude);
+            params.put("longitude", longitude);
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
+
         RequestQueue queue = Volley.newRequestQueue(this);
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.PUT, url1, parameter,
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.PUT, url1, params,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
                         Toast toast = Toast.makeText(getApplicationContext(), "유저 정보가 서버로 전송되었습니다.", Toast.LENGTH_LONG);
                         toast.show();
-
-                        Log.d(TAG, "Put success : " + parameter);
 
                     }
                 },
@@ -129,17 +135,15 @@ public class SendActivity extends AppCompatActivity {
                         Log.d(TAG, "Put Fail");
                     }
                 });
+                jsonObjectRequest.setRetryPolicy(new com.android.volley.DefaultRetryPolicy(
+
+                90000 ,
+
+                com.android.volley.DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+
+                com.android.volley.DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
         queue.add(jsonObjectRequest);
-
-//        이건 https://mine-it-record.tistory.com/191 보면서 하고 있음
-//        Handler mHandler = new Handler();
-//        mHandler.postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                // 시간 지난 후 실행할 코딩
-//            }
-//        }, 8000); // 8초 후
 
     }
 
