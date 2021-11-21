@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SignupInitialInfoActivity"
+    android:background="@drawable/custom_7718">
+
+    <TextView
+        android:id="@+id/myNameCardText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:shadowColor="#009a0f0f"
+        android:shadowDx="0"
+        android:shadowDy="3"
+        android:shadowRadius="6"
+        android:fontFamily="@font/noto_sans_cjkkr_regular"
+        android:textStyle="normal"
+        android:textSize="40sp"
+        android:textColor="#191919"
+        android:letterSpacing="-0.05"
+        android:gravity="end"
+        tools:text="내 명함"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="28dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <Button
+        android:id="@+id/saveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="664dp"
+        android:layout_marginEnd="160dp"
+        android:backgroundTint="@color/beige0"
+        android:text="저장하기"
+        android:textColor="@color/black0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="385dp"
+        android:background="@drawable/custom_24018"
+        android:layout_marginTop="92.5dp"
+        app:layout_constraintTop_toTopOf="@+id/getInfoRectangular">
+    </View>
+
+    <!--Code for layer -->
+    <View
+        android:id="@+id/getInfoRectangular"
+        android:layout_width="match_parent"
+        android:layout_height="560dp"
+        android:layout_marginHorizontal="15dp"
+        android:background="@drawable/custom_24019"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.965"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/myNameCardText"/>
+
+    <TextView
+        android:id="@+id/jobText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="15dp"
+        android:textSize="18sp"
+        app:layout_constraintLeft_toLeftOf="@+id/getInfoRectangular"
+        app:layout_constraintTop_toTopOf="@+id/getInfoRectangular"
+        android:text="직업"
+        android:textColor="@color/black0"
+        />
+
+    <EditText
+        android:id="@+id/jobEdit"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textColor="@color/black0"
+        android:textSize="20sp"
+        android:layout_marginHorizontal="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/jobText"
+        />
+    <TextView
+        android:id="@+id/positionText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="15dp"
+        android:textSize="18sp"
+        app:layout_constraintLeft_toLeftOf="@+id/getInfoRectangular"
+        app:layout_constraintTop_toBottomOf="@+id/jobEdit"
+        android:text="소속"
+        android:textColor="@color/black0"
+        />
+
+    <EditText
+        android:id="@+id/positionEdit"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textColor="@color/black0"
+        android:textSize="20sp"
+        android:layout_marginHorizontal="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/positionText"
+        />
+
+    <TextView
+        android:id="@+id/callText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="15dp"
+        android:textSize="18sp"
+        app:layout_constraintLeft_toLeftOf="@+id/getInfoRectangular"
+        app:layout_constraintTop_toBottomOf="@+id/positionEdit"
+        android:text="전화번호"
+        android:textColor="@color/black0"
+        />
+
+    <EditText
+        android:id="@+id/callEdit"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textColor="@color/black0"
+        android:textSize="20sp"
+        android:layout_marginHorizontal="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/callText"
+        />
+
+    <TextView
+        android:id="@+id/faxText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="15dp"
+        android:textSize="18sp"
+        app:layout_constraintLeft_toLeftOf="@+id/getInfoRectangular"
+        app:layout_constraintTop_toBottomOf="@+id/callEdit"
+        android:text="팩스"
+        android:textColor="@color/black0"
+        />
+
+    <EditText
+        android:id="@+id/faxEdit"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textColor="@color/black0"
+        android:textSize="20sp"
+        android:layout_marginHorizontal="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/faxText"
+        />
+
+    <TextView
+        android:id="@+id/dateText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="15dp"
+        android:textSize="18sp"
+        app:layout_constraintLeft_toLeftOf="@+id/getInfoRectangular"
+        app:layout_constraintTop_toBottomOf="@+id/faxEdit"
+        android:text="소속일자"
+        android:textColor="@color/black0"
+        />
+
+    <EditText
+        android:id="@+id/dateEdit"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textColor="@color/black0"
+        android:textSize="20sp"
+        android:layout_marginHorizontal="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dateText"
+        />
+
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
