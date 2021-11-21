@@ -1,7 +1,9 @@
 package com.cname.nada;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -10,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,14 +20,33 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.cname.nada.functions.CurrentFriendID;
 import com.cname.nada.functions.RecyclerViewAdapterInFrag2;
+import com.cname.nada.functions.RecyclerViewAdapterInSendActivity;
+import com.cname.nada.functions.SendJsonObjectGetJsonArrayRequest;
+import com.cname.nada.functions.UserID;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Frag2 extends Fragment {
     private View view;
     private ImageView searchBtn, sendBtn, settingsInListBtn;
+    private final String TAG = this.getClass().getSimpleName();
+    private String url1 = "http://ec2-3-37-249-141.ap-northeast-2.compute.amazonaws.com:8080/view/friend/" + UserID.getUserId() + "/";
 
 
     @Nullable
@@ -35,14 +57,48 @@ public class Frag2 extends Fragment {
 
         //리사이클러뷰에 표시할 데이터 리스트 생성.
         ArrayList<ArrayList<String>> list = new ArrayList<>();
-        for (int i=0; i<100; i++) {
-            ArrayList<String> innerList = new ArrayList<>();
-            innerList.add(String.format("&d", i));
-            innerList.add(String.format("name %d", i));
-            innerList.add(String.format("belong %d", i));
-            innerList.add(String.format("position %d", i));
-            list.add(innerList);
-        }
+
+        RequestQueue queue = Volley.newRequestQueue(getContext());
+
+        try {
+            JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url1, null,
+                    new Response.Listener<JSONArray>() {
+                        @Override
+                        public void onResponse(JSONArray response) {
+                            Toast toast = Toast.makeText(getContext(), "유저 정보가 서버로 전송되었습니다.", Toast.LENGTH_LONG);
+                            toast.show();
+
+                            for (int i = 0; i < response.length(); i++) {
+                                ArrayList<String> innerArrayList = new ArrayList<>();
+                                try {
+                                    JSONObject jsonObject = new JSONObject(response.getString(i));
+                                    innerArrayList.add(jsonObject.getString("id"));
+                                    innerArrayList.add(jsonObject.getString("name"));
+                                    innerArrayList.add(jsonObject.getString("belong_data"));
+                                    innerArrayList.add(jsonObject.getString("position_data"));
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                                list.add(innerArrayList);
+                            }
+
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Toast toast = Toast.makeText(getContext(), "유저 정보가 정상적으로 전송되지 않습니다.", Toast.LENGTH_LONG);
+                            toast.show();
+
+                            error.printStackTrace();
+                            Log.d(TAG, "Post Fail");
+                        }
+                    });
+
+            queue.add(jsonArrayRequest);
+        }catch (Exception e){}
+
+
 
         // 리사이클러뷰에 LinearLayoutManager 객체 지정.
         RecyclerView recyclerView = view.findViewById(R.id.recycler1);
