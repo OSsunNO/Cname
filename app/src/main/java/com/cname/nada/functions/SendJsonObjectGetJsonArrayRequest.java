@@ -1,0 +1,69 @@
+package com.cname.nada.functions;
+
+import com.android.volley.NetworkResponse;
+import com.android.volley.ParseError;
+import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.HttpHeaderParser;
+import com.android.volley.toolbox.JsonRequest;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
+
+public class SendJsonObjectGetJsonArrayRequest<T> extends JsonRequest<JSONArray> {
+
+    private JSONObject mRequestObject;
+    private Response.Listener<JSONArray> mResponseListener;
+
+    public SendJsonObjectGetJsonArrayRequest(int method, String url, JSONObject requestObject, Response.Listener<JSONArray> responseListener,  Response.ErrorListener errorListener) {
+        super(method, url, (requestObject == null) ? null : requestObject.toString(), responseListener, errorListener);
+        mRequestObject = requestObject;
+        mResponseListener = responseListener;
+
+//        setRetryPolicy(new com.android.volley.DefaultRetryPolicy(
+//                20000 ,
+//                com.android.volley.DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+//                com.android.volley.DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        this.setRetryPolicy(new RetryPolicy() {
+            @Override
+            public int getCurrentTimeout() {
+                return 50000;
+            }
+
+            @Override
+            public int getCurrentRetryCount() {
+                return 50000;
+            }
+
+            @Override
+            public void retry(VolleyError error) throws VolleyError {
+
+            }
+        });
+    }
+
+    @Override
+    protected void deliverResponse(JSONArray response) {
+        mResponseListener.onResponse(response);
+    }
+
+    @Override
+    protected Response<JSONArray> parseNetworkResponse(NetworkResponse response) {
+        try {
+            String json = new String(response.data, HttpHeaderParser.parseCharset(response.headers));
+            try {
+                return Response.success(new JSONArray(json),
+                        HttpHeaderParser.parseCacheHeaders(response));
+            } catch (JSONException e) {
+                return Response.error(new ParseError(e));
+            }
+        } catch (UnsupportedEncodingException e) {
+            return Response.error(new ParseError(e));
+        }
+    }
+}

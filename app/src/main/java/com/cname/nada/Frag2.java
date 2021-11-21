@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.cname.nada.functions.CurrentFriendID;
-import com.cname.nada.functions.RecyclerViewAdapter;
+import com.cname.nada.functions.RecyclerViewAdapterInFrag2;
 
 import java.util.ArrayList;
 
@@ -49,10 +49,10 @@ public class Frag2 extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         // 리사이클러뷰에 RecyclerViewAdapter 객체 지정.
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(list);
+        RecyclerViewAdapterInFrag2 adapter = new RecyclerViewAdapterInFrag2(list);
         recyclerView.setAdapter(adapter);
 
-        adapter.setOnItemClickListener(new RecyclerViewAdapter.OnItemClickListener() {
+        adapter.setOnItemClickListener(new RecyclerViewAdapterInFrag2.OnItemClickListener() {
             @Override
             public void onItemClick(View v, int pos, String userId) {
                 CurrentFriendID.setFriendId(userId);

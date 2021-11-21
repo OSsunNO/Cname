@@ -19,18 +19,20 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.cname.nada.functions.CurrentFriendID;
 import com.cname.nada.functions.GpsTracker;
+import com.cname.nada.functions.RecyclerViewAdapterInFrag2;
+import com.cname.nada.functions.RecyclerViewAdapterInSendActivity;
+import com.cname.nada.functions.SendJsonObjectGetJsonArrayRequest;
+import com.cname.nada.functions.SimpleDividerItemDecoration;
 import com.cname.nada.functions.UserID;
 
 import org.json.JSONArray;
@@ -38,17 +40,16 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
 public class SendActivity extends AppCompatActivity {
 
     private ImageView returnBtn;
-    String url1 = "http://ec2-3-37-249-141.ap-northeast-2.compute.amazonaws.com:8080/exchange/card/" + UserID.getUserId() + "/";
+    private String url1 = "http://ec2-3-37-249-141.ap-northeast-2.compute.amazonaws.com:8080/exchange/card/" + UserID.getUserId() + "/";
     private final String TAG = this.getClass().getSimpleName();
     private RecyclerView recyclerView;
 
@@ -85,6 +86,15 @@ public class SendActivity extends AppCompatActivity {
 
         recyclerView.setVisibility(View.GONE);
 
+        // 리사이클러뷰에 LinearLayoutManager 객체 지정.
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        // 데코레이션은 어뎁터 세팅 전에 추가해줘야 함.
+        // https://inma.tistory.com/56 참고함.
+        recyclerView.addItemDecoration(new SimpleDividerItemDecoration(this));
+
+
+
         returnBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) { finish(); }
@@ -115,35 +125,49 @@ public class SendActivity extends AppCompatActivity {
 
 
         RequestQueue queue = Volley.newRequestQueue(this);
+        try {
+            SendJsonObjectGetJsonArrayRequest sendJsonObjectGetJsonArrayRequest = new SendJsonObjectGetJsonArrayRequest(Request.Method.PUT, url1, params,
+                    new Response.Listener<JSONArray>() {
+                        @Override
+                        public void onResponse(JSONArray response) {
+                            ArrayList<ArrayList<String>> list = new ArrayList<>();
+                            for (int i = 0; i < response.length(); i++) {
+                                ArrayList<String> innerArrayList = new ArrayList<>();
+                                try {
+                                    JSONObject jsonObject = response.getJSONObject(i);
+                                    innerArrayList.add(Integer.toString(jsonObject.getInt("id")));
+                                    innerArrayList.add(jsonObject.getString("name"));
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                                list.add(innerArrayList);
+                            }
+                            // 리사이클러뷰에 RecyclerViewAdapter 객체 지정.
+                            RecyclerViewAdapterInSendActivity adapter = new RecyclerViewAdapterInSendActivity(list);
+                            recyclerView.setAdapter(adapter);
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.PUT, url1, params,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        Toast toast = Toast.makeText(getApplicationContext(), "유저 정보가 서버로 전송되었습니다.", Toast.LENGTH_LONG);
-                        toast.show();
+                            recyclerView.setVisibility(View.VISIBLE);
 
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast toast = Toast.makeText(getApplicationContext(), "유저 정보가 정상적으로 전송되지 않습니다.", Toast.LENGTH_LONG);
-                        toast.show();
+                            adapter.setOnItemClickListener(new RecyclerViewAdapterInSendActivity.OnItemClickListener() {
+                                @Override
+                                public void onItemClick(View v, int pos, String userId) {
 
-                        error.printStackTrace();
-                        Log.d(TAG, "Put Fail");
-                    }
-                });
-                jsonObjectRequest.setRetryPolicy(new com.android.volley.DefaultRetryPolicy(
+                                }
+                            });
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Toast toast = Toast.makeText(getApplicationContext(), "유저 정보가 정상적으로 전송되지 않습니다.", Toast.LENGTH_LONG);
+                            toast.show();
 
-                90000 ,
-
-                com.android.volley.DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-
-                com.android.volley.DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-
-        queue.add(jsonObjectRequest);
+                            error.printStackTrace();
+                            Log.d(TAG, "Put Fail");
+                        }
+                    });
+            queue.add(sendJsonObjectGetJsonArrayRequest);
+        }catch (Exception e){Log.d(TAG, "Put Fail");};
 
     }
 

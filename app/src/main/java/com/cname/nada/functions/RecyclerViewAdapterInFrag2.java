@@ -13,7 +13,7 @@ import com.cname.nada.R;
 
 import java.util.ArrayList;
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
+public class RecyclerViewAdapterInFrag2 extends RecyclerView.Adapter<RecyclerViewAdapterInFrag2.ViewHolder> {
 
     private ArrayList<ArrayList<String>> mData = null;
     private OnItemClickListener mListener = null;
@@ -58,25 +58,25 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     // 생성자에서 데이터 리스트 객체를 전달받음.
-    public RecyclerViewAdapter(ArrayList<ArrayList<String>> list) {
+    public RecyclerViewAdapterInFrag2(ArrayList<ArrayList<String>> list) {
         mData = list;
     }
 
     // onCreateViewHolder() - 아이템 뷰를 위한 뷰홀더 객체 생성하여 리턴.
     @Override
-    public RecyclerViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerViewAdapterInFrag2.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         View view = inflater.inflate(R.layout.recyclerview_item, parent, false);
-        RecyclerViewAdapter.ViewHolder vh = new RecyclerViewAdapter.ViewHolder(view);
+        RecyclerViewAdapterInFrag2.ViewHolder vh = new RecyclerViewAdapterInFrag2.ViewHolder(view);
 
         return vh;
     }
 
     // onBindViewHolder() - position에 해당하는 데이터를 뷰홀더의 아이템뷰에 표시.
     @Override
-    public void onBindViewHolder(RecyclerViewAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerViewAdapterInFrag2.ViewHolder holder, int position) {
         holder.userId = mData.get(position).get(0);
         String nameOfFriend = mData.get(position).get(1);
         String belongOfFriend = mData.get(position).get(2);
