@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:backgroundTint="#ffffff">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -18,43 +18,34 @@
             android:id="@+id/logoImageView"
             android:layout_width="45dp"
             android:layout_height="35dp"
+            android:layout_marginLeft="18dp"
             android:contentDescription="@string/app_logo"
             android:src="@drawable/logo"
-            android:layout_marginTop="12dp"
-            android:layout_marginLeft="18dp"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/aboveTheNameCardLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        app:layout_constraintTop_toBottomOf="@+id/topBarLayout">
-        <TextView
-            android:id="@+id/nameCardIntroduction"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:textSize="18sp"
-            android:textColor="@color/gray0"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:text="님의 명함"/>
+        <ImageView
+            android:id="@+id/EditBtn"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="18dp"
+            android:contentDescription="editBtn"
+            android:src="@drawable/icon_edit"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <FrameLayout
+        android:id="@+id/frameLayout"
         android:layout_width="100dp"
         android:layout_height="38dp"
         android:layout_marginEnd="100dp"
-        app:layout_constraintBottom_toTopOf="@+id/container"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/topBarLayout"
-        app:layout_constraintVertical_bias="0.886">
+        app:layout_constraintTop_toBottomOf="@+id/nameCardIntroduction">
 
 
         <View
@@ -65,14 +56,13 @@
             tools:layout_editor_absoluteY="84dp"></View>
 
         <Button
-            android:id="@+id/FriendHis"
+            android:id="@+id/HisMove"
             android:layout_width="100dp"
             android:layout_height="38dp"
             android:background="@drawable/custom_23934"
+            android:visibility="invisible"
             tools:layout_editor_absoluteX="224dp"
-            tools:layout_editor_absoluteY="84dp"
-            android:visibility="invisible">
-        </Button>
+            tools:layout_editor_absoluteY="84dp"></Button>
 
         <TextView
             android:layout_width="wrap_content"
@@ -93,11 +83,8 @@
         android:layout_width="100dp"
         android:layout_height="38dp"
         android:layout_marginStart="100dp"
-        android:layout_marginTop="24dp"
-        app:layout_constraintBottom_toTopOf="@+id/container"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/topBarLayout"
-        app:layout_constraintVertical_bias="0.75">
+        app:layout_constraintTop_toBottomOf="@+id/nameCardIntroduction">
 
         <View
             android:layout_width="100dp"
@@ -105,11 +92,10 @@
             android:background="@drawable/custom_23933"></View>
 
         <Button
-            android:id="@+id/FriendCard"
+            android:id="@+id/nameCardMove"
             android:layout_width="100dp"
             android:layout_height="38dp"
-            android:visibility="invisible">
-        </Button>
+            android:visibility="invisible"></Button>
 
         <TextView
             android:layout_width="wrap_content"
@@ -124,38 +110,63 @@
             tools:text="명함" />
     </FrameLayout>
 
-    <FrameLayout
-        android:id="@+id/container"
-        android:layout_width="400dp"
-        android:layout_height="266dp"
-        android:layout_marginTop="52dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.454"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/aboveTheNameCardLayout" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
+    <TextView
+        android:id="@+id/nameCardIntroduction"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="134dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="님의 이력"
+        android:textColor="@color/gray0"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/container">
+        app:layout_constraintTop_toBottomOf="@+id/topBarLayout" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/CareerRecyclerView"
-        android:layout_width="411dp"
-        android:layout_height="245dp"
+    <FrameLayout
+        android:layout_width="412dp"
+        android:layout_height="609dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/container" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="412dp"
+            android:layout_height="109dp"
+            android:layout_gravity="center_horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/noto_sans_cjkkr_bold"
+                android:gravity="end"
+                android:letterSpacing="-0.05"
+                android:lineSpacingExtra="8.5sp"
+                android:textColor="#000000"
+                android:textSize="32dp"
+                android:textStyle="normal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:text="2020" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="412dp"
+            android:layout_height="500dp"
+            android:layout_gravity="center_horizontal|bottom">
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+
+
+
+    </FrameLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
