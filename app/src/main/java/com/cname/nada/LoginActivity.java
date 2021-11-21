@@ -65,7 +65,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         toTheMainBt = (Button) findViewById(R.id.ToTheMainButton);
         toTheMainBt.setOnClickListener(this);
 
-        tempoTextView = (TextView) findViewById(R.id.hellotextview);
 
         // [START configure_signin]
         // 앱에 필요한 사용자 데이터를 요청하도록 로그인 옵션을 설정한다.

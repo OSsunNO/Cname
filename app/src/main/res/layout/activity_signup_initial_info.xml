@@ -75,7 +75,7 @@
     <EditText
         android:id="@+id/nameEdit"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="50dp"
         android:textColor="@color/black0"
         android:textSize="20sp"
         android:layout_marginHorizontal="30dp"
@@ -100,7 +100,7 @@
     <EditText
         android:id="@+id/phoneEdit"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="50dp"
         android:textColor="@color/black0"
         android:textSize="20sp"
         android:layout_marginHorizontal="30dp"
@@ -125,7 +125,7 @@
     <EditText
         android:id="@+id/emailEdit"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="50dp"
         android:textColor="@color/black0"
         android:textSize="20sp"
         android:layout_marginHorizontal="30dp"
@@ -150,7 +150,7 @@
     <EditText
         android:id="@+id/jobEdit"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="50dp"
         android:textColor="@color/black0"
         android:textSize="20sp"
         android:layout_marginHorizontal="30dp"
@@ -175,7 +175,7 @@
     <EditText
         android:id="@+id/birthEdit"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="50dp"
         android:textColor="@color/black0"
         android:textSize="20sp"
         android:layout_marginHorizontal="30dp"
