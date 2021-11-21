@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MyProfileEditPage"
-    android:background="@color/white1">
+    android:background="@color/white1"
+    tools:context=".MyProfileEditPage">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/topBarLayout"
@@ -19,100 +19,308 @@
             android:id="@+id/logoImageView"
             android:layout_width="45dp"
             android:layout_height="35dp"
+            android:layout_marginLeft="18dp"
+            android:layout_marginTop="12dp"
             android:contentDescription="@string/app_logo"
             android:src="@drawable/logo"
-            android:layout_marginTop="12dp"
-            android:layout_marginLeft="18dp"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/SaveBtn"
             android:layout_width="28dp"
             android:layout_height="28dp"
-            android:contentDescription="saveBtn"
-            android:src="@drawable/icon_save"
             android:layout_marginTop="15dp"
             android:layout_marginRight="18dp"
+            android:contentDescription="saveBtn"
+            android:src="@drawable/icon_save"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
-        android:id="@+id/TextViewName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/black1"
-        android:gravity="center"
-        android:textSize="18sp"
-        android:text="이름"
-        android:textStyle="bold"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="25dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/topBarLayout" />
+        android:layout_marginEnd="40dp"
+        android:fontFamily="@font/noto_sans_cjkkr_regular"
+        android:gravity="end"
+        android:letterSpacing="-0.05"
+        android:lineSpacingExtra="11sp"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        android:textStyle="normal"
+        app:layout_constraintBottom_toTopOf="@+id/EditFrame"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topBarLayout"
+        tools:text="명함 수정하기" />
 
-    <EditText
-        android:id="@+id/EditTxtName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/black1"
-        android:textColorHint="@color/gray1"
-        android:layout_marginTop="3dp"
-        android:layout_marginHorizontal="22dp"
-        app:layout_constraintTop_toBottomOf="@+id/TextViewName"
-        android:hint="이름을 입력해 주십시오." />
+    <FrameLayout
+        android:id="@+id/EditFrame"
+        android:layout_width="397dp"
+        android:layout_height="555dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
-    <TextView
-        android:id="@+id/TextViewAddress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/black1"
-        android:gravity="center"
-        android:textSize="18sp"
-        android:text="연락처"
-        android:textStyle="bold"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="25dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/EditTxtName" />
+        <View
+            android:layout_width="326dp"
+            android:layout_height="550dp"
+            android:layout_gravity="center"
+            android:background="@drawable/custom_24019" />
 
-    <EditText
-        android:id="@+id/EditTxtAddress1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/black1"
-        android:textColorHint="@color/gray1"
-        android:layout_marginTop="3dp"
-        android:layout_marginHorizontal="22dp"
-        app:layout_constraintTop_toBottomOf="@+id/TextViewAddress"
-        android:hint="연락처를 입력해 주십시오." />
+        <ScrollView
+            android:id="@+id/scrollView2"
+            android:layout_width="330dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal">
 
-    <TextView
-        android:id="@+id/TextViewEmail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/black1"
-        android:gravity="center"
-        android:textSize="18sp"
-        android:text="이메일"
-        android:textStyle="bold"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="25dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/EditTxtAddress1" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="@+id/scrollView2"
+                app:layout_constraintEnd_toEndOf="@+id/scrollView2"
+                app:layout_constraintStart_toStartOf="@+id/scrollView2"
+                app:layout_constraintTop_toTopOf="@+id/scrollView2">
 
-    <EditText
-        android:id="@+id/EditTxtEmail1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/black1"
-        android:textColorHint="@color/gray1"
-        android:layout_marginTop="3dp"
-        android:layout_marginHorizontal="22dp"
-        app:layout_constraintTop_toBottomOf="@+id/TextViewEmail"
-        android:hint="이메일을 입력해 주십시오." />
+                <TextView
+                    android:id="@+id/TextViewName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="22dp"
+                    android:layout_marginTop="24dp"
+                    android:gravity="center"
+                    android:text="이름"
+                    android:textColor="@color/black1"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/EditTxtName"
+                    android:layout_width="330dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="2dp"
+                    android:layout_marginTop="3dp"
+                    android:hint="변경할 이름을 입력해 주십시오."
+                    android:textColor="@color/black1"
+                    android:textColorHint="@color/gray1"
+                    android:gravity="center"/>
+
+                <TextView
+                    android:id="@+id/TextViewAddress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="22dp"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center"
+                    android:text="연락처"
+                    android:textColor="@color/black1"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/EditTxtAddress1"
+                    android:layout_width="330dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="2dp"
+                    android:layout_marginTop="4dp"
+                    android:hint="변경할 연락처를 입력해 주십시오."
+                    android:textColor="@color/black1"
+                    android:textColorHint="@color/gray1"
+                    android:gravity="center"/>
+
+                <TextView
+                    android:id="@+id/TextViewEmail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="22dp"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center"
+                    android:text="이메일"
+                    android:textColor="@color/black1"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/EditTxtEmail1"
+                    android:layout_width="330dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="2dp"
+                    android:layout_marginTop="4dp"
+                    android:hint="변경할 이메일을 입력해 주십시오."
+                    android:textColor="@color/black1"
+                    android:textColorHint="@color/gray1"
+                    android:gravity="center"/>
+
+                <TextView
+                    android:id="@+id/TextBlue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="22dp"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center"
+                    android:text="블루투스"
+                    android:textColor="@color/black1"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/EditBlue"
+                    android:layout_width="330dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="2dp"
+                    android:layout_marginTop="4dp"
+                    android:hint="변경할 블루투스 번호를 입력해 주십시오."
+                    android:textColor="@color/black1"
+                    android:textColorHint="@color/gray1"
+                    android:gravity="center"/>
+
+                <TextView
+                    android:id="@+id/TextBirth"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="22dp"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center"
+                    android:text="생일"
+                    android:textColor="@color/black1"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/EditBirth"
+                    android:layout_width="330dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="2dp"
+                    android:layout_marginTop="4dp"
+                    android:hint="변경할 생년월일을 입력해 주십시오."
+                    android:textColor="@color/black1"
+                    android:textColorHint="@color/gray1"
+                    android:gravity="center"/>
+
+                <TextView
+                    android:id="@+id/TextJob"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="22dp"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center"
+                    android:text="직업"
+                    android:textColor="@color/black1"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/EditJob"
+                    android:layout_width="330dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="2dp"
+                    android:layout_marginTop="4dp"
+                    android:hint="변경할 직업을 입력해 주십시오."
+                    android:textColor="@color/black1"
+                    android:textColorHint="@color/gray1"
+                    android:gravity="center"/>
+
+                <TextView
+                    android:id="@+id/TextPosi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="22dp"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center"
+                    android:text="소속"
+                    android:textColor="@color/black1"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/EditPosi"
+                    android:layout_width="330dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="2dp"
+                    android:layout_marginTop="4dp"
+                    android:hint="변경할 소속을 입력해 주십시오."
+                    android:textColor="@color/black1"
+                    android:textColorHint="@color/gray1"
+                    android:gravity="center"/>
+
+                <TextView
+                    android:id="@+id/TextTel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="22dp"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center"
+                    android:text="전화번호"
+                    android:textColor="@color/black1"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/EditTel"
+                    android:layout_width="330dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="2dp"
+                    android:layout_marginTop="4dp"
+                    android:hint="변경할 전화번호를 입력해 주십시오."
+                    android:textColor="@color/black1"
+                    android:textColorHint="@color/gray1"
+                    android:gravity="center"/>
+
+                <TextView
+                    android:id="@+id/TextFax"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="22dp"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center"
+                    android:text="팩스"
+                    android:textColor="@color/black1"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/EditFax"
+                    android:layout_width="330dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="2dp"
+                    android:layout_marginTop="4dp"
+                    android:hint="변경할 팩스번호를 입력해 주십시오."
+                    android:textColor="@color/black1"
+                    android:textColorHint="@color/gray1"
+                    android:gravity="center"/>
+
+                <TextView
+                    android:id="@+id/TextDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="22dp"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center"
+                    android:text="소속일자"
+                    android:textColor="@color/black1"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/date"
+                    android:layout_width="330dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="2dp"
+                    android:layout_marginTop="4dp"
+                    android:hint="변경할 소속일자를 입력해 주십시오."
+                    android:textColor="@color/black1"
+                    android:textColorHint="@color/gray1"
+                    android:gravity="center"/>
+
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </FrameLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
