@@ -1,5 +1,7 @@
 package com.cname.nada.functions;
 
+import java.util.ArrayList;
+
 public class CurrentFriendID {
     private static String friendId;
 
@@ -11,3 +13,4 @@ public class CurrentFriendID {
         CurrentFriendID.friendId = friendId;
     }
 }
+

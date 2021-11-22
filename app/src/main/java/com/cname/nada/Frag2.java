@@ -1,8 +1,9 @@
 package com.cname.nada;
 
-import android.content.Context;
+
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -17,37 +18,39 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.cname.nada.functions.CurrentFriendID;
 import com.cname.nada.functions.RecyclerViewAdapterInFrag2;
-import com.cname.nada.functions.RecyclerViewAdapterInSendActivity;
-import com.cname.nada.functions.SendJsonObjectGetJsonArrayRequest;
 import com.cname.nada.functions.UserID;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class Frag2 extends Fragment {
     private View view;
     private ImageView searchBtn, sendBtn, settingsInListBtn;
-    private final String TAG = this.getClass().getSimpleName();
     private String url1 = "http://ec2-3-37-249-141.ap-northeast-2.compute.amazonaws.com:8080/view/friend/" + UserID.getUserId() + "/";
+    private final String TAG = this.getClass().getSimpleName();
+    private RecyclerViewAdapterInFrag2 adapter = new RecyclerViewAdapterInFrag2();
+    
+    @Override
+    public void onCreate(Bundle savedInstanceState){
+        super.onCreate(savedInstanceState);
 
+    }
 
     @Nullable
     @Override
@@ -55,7 +58,6 @@ public class Frag2 extends Fragment {
     {
         view = inflater.inflate(R.layout.frag2,container,false);
 
-        //리사이클러뷰에 표시할 데이터 리스트 생성.
         ArrayList<ArrayList<String>> list = new ArrayList<>();
 
         RequestQueue queue = Volley.newRequestQueue(getContext());
@@ -65,8 +67,6 @@ public class Frag2 extends Fragment {
                     new Response.Listener<JSONArray>() {
                         @Override
                         public void onResponse(JSONArray response) {
-                            Toast toast = Toast.makeText(getContext(), "유저 정보가 서버로 전송되었습니다.", Toast.LENGTH_LONG);
-                            toast.show();
 
                             for (int i = 0; i < response.length(); i++) {
                                 ArrayList<String> innerArrayList = new ArrayList<>();
@@ -96,17 +96,46 @@ public class Frag2 extends Fragment {
                     });
 
             queue.add(jsonArrayRequest);
-        }catch (Exception e){}
+        }catch (Exception e){ e.printStackTrace();}
 
 
+        Handler mHandler = new Handler();
+        mHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                // 리사이클러뷰에 LinearLayoutManager 객체 지정.
+                RecyclerView recyclerView = view.findViewById(R.id.recycler1);
+                recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        // 리사이클러뷰에 LinearLayoutManager 객체 지정.
-        RecyclerView recyclerView = view.findViewById(R.id.recycler1);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                // 리사이클러뷰에 RecyclerViewAdapter 객체 지정.
+                recyclerView.setAdapter(adapter);
+                adapter.setList(list);
+            }
+        }, 180);
 
-        // 리사이클러뷰에 RecyclerViewAdapter 객체 지정.
-        RecyclerViewAdapterInFrag2 adapter = new RecyclerViewAdapterInFrag2(list);
-        recyclerView.setAdapter(adapter);
+
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+
+        SwipeRefreshLayout mSwipeRefreshLayout = view.findViewById(R.id.swipe_layout);
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                ft.commit();
+                final Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        mSwipeRefreshLayout.setRefreshing(false);
+                    }
+                }, 500);
+
+            }
+        });
+        ft.detach(this).attach(this).commit();
+
+
+        Toast toast = Toast.makeText(getContext(), "유저 정보가 서버로 전송되었습니다.", Toast.LENGTH_LONG);
+        toast.show();
 
         adapter.setOnItemClickListener(new RecyclerViewAdapterInFrag2.OnItemClickListener() {
             @Override
@@ -163,6 +192,7 @@ public class Frag2 extends Fragment {
                 popup.show();
             }
     });
-    return view;
+        return view;
     }
+
 }

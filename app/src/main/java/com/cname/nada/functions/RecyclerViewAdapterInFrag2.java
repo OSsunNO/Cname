@@ -58,9 +58,7 @@ public class RecyclerViewAdapterInFrag2 extends RecyclerView.Adapter<RecyclerVie
     }
 
     // 생성자에서 데이터 리스트 객체를 전달받음.
-    public RecyclerViewAdapterInFrag2(ArrayList<ArrayList<String>> list) {
-        mData = list;
-    }
+    public RecyclerViewAdapterInFrag2() { }
 
     // onCreateViewHolder() - 아이템 뷰를 위한 뷰홀더 객체 생성하여 리턴.
     @Override
@@ -90,5 +88,11 @@ public class RecyclerViewAdapterInFrag2 extends RecyclerView.Adapter<RecyclerVie
     @Override
     public int getItemCount() {
         return mData.size();
+    }
+
+    // data 모델의 객체들을 list에 저장
+    public void setList(ArrayList<ArrayList<String>> list) {
+        this.mData = list;
+        notifyDataSetChanged();
     }
 }
