@@ -71,7 +71,6 @@
         android:text="로그아웃"
         app:layout_constraintBottom_toTopOf="@+id/ToTheMainButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.56"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
@@ -102,13 +101,16 @@
 
         <com.google.android.gms.common.SignInButton
             android:id="@+id/GoogleLoginButton"
-            android:layout_width="339dp"
-            android:layout_height="69dp"
+            android:layout_width="300dp"
+            android:layout_height="match_parent"
             android:layout_marginHorizontal="40dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.619"
             app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="527dp">
+            android:layout_gravity="center"
+            tools:layout_editor_absoluteY="527dp"
+            tools:visibility="visible">
+
 
             <Button
                 android:id="@+id/GoogleLoginFake"
@@ -119,6 +121,7 @@
                 android:drawableLeft="@drawable/google_logo_resized"
                 android:paddingLeft="15dp"
                 android:text="google로 로그인하기"
+                android:layout_gravity="center"
                 android:textColor="@color/black0"
                 android:textSize="18sp"
                 android:textStyle="bold"

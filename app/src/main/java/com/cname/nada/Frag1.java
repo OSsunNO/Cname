@@ -20,7 +20,7 @@ public class Frag1 extends Fragment {
     private ImageView editBtn;
     private boolean showingBack;
     private FrameLayout nameCardView;
-    private Button addCareerBtn, sendBtn;
+    private Button addCareerBtn, sendBtn, CareerBtn;
 
 
     @Nullable

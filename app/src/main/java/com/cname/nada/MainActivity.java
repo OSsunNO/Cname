@@ -1,31 +1,17 @@
 package com.cname.nada;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.Volley;
-import com.cname.nada.functions.UserID;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
 {
@@ -33,6 +19,7 @@ public class MainActivity extends AppCompatActivity
     private FragmentManager fm;
     private FragmentTransaction ft;
     private Frag1 frag1;
+    private Frag1_career frag1career;
     private Frag2 frag2;
     private Frag3 frag3;
     private Frag4 frag4;

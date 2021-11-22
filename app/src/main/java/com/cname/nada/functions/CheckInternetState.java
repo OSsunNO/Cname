@@ -3,7 +3,6 @@ package com.cname.nada.functions;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.telecom.DisconnectCause;
 import android.widget.Toast;
 
 public class CheckInternetState {

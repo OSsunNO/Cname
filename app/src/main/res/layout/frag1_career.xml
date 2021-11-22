@@ -89,7 +89,7 @@
         <View
             android:layout_width="100dp"
             android:layout_height="38dp"
-            android:background="@drawable/custom_23933"></View>
+            android:background="@drawable/custom_23934"></View>
 
         <Button
             android:id="@+id/nameCardMove"
@@ -121,52 +121,34 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/topBarLayout" />
 
-    <FrameLayout
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="412dp"
-        android:layout_height="609dp"
+        android:layout_height="59dp"
+        android:layout_gravity="center_horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout2"
+        android:layout_width="412dp"
+        android:layout_height="550dp"
+        android:layout_gravity="center_horizontal|bottom"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="412dp"
-            android:layout_height="109dp"
-            android:layout_gravity="center_horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/noto_sans_cjkkr_bold"
-                android:gravity="end"
-                android:letterSpacing="-0.05"
-                android:lineSpacingExtra="8.5sp"
-                android:textColor="#000000"
-                android:textSize="32dp"
-                android:textStyle="normal"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                tools:text="2020" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="412dp"
+        <ListView
+            android:layout_width="362dp"
             android:layout_height="500dp"
-            android:layout_gravity="center_horizontal|bottom">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </ListView>
 
 
-
-
-
-
-
-
-    </FrameLayout>
-
-
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
