@@ -20,7 +20,7 @@ public class Frag1 extends Fragment {
     private ImageView editBtn;
     private boolean showingBack;
     private FrameLayout nameCardView;
-    private Button addCareerBtn, sendBtn, CareerBtn;
+    private Button addCareerBtn, sendBtn;
 
 
     @Nullable
@@ -33,7 +33,6 @@ public class Frag1 extends Fragment {
         editBtn = (ImageView) view.findViewById(R.id.EditBtn);
         nameCardView = (FrameLayout) view.findViewById(R.id.container);
         sendBtn = (Button) view.findViewById(R.id.SendBtn);
-
         sendBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

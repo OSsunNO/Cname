@@ -104,8 +104,8 @@ public class SignupInitialInfoActivity2 extends AppCompatActivity {
                 JSONObject parameter = new JSONObject();
                 try{
                     parameter.put("user_id", UserID.getUserId());
-                    parameter.put("position_data", positionEdit.getText());
                     parameter.put("belong_data", belongEdit.getText());
+                    parameter.put("position_data", positionEdit.getText());
                     parameter.put("tel_data", callEdit.getText());
                     parameter.put("fax_data", faxEdit.getText());
                     parameter.put("start_data", dateEdit.getText());
