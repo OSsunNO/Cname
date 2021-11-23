@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -94,19 +95,21 @@ public class FriendPageActivity extends AppCompatActivity {
                 .commit();
     }
 
-    // A fragment representing the front of the card.
-    public static class CardFrontFragment extends Fragment {
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-            return inflater.inflate(R.layout.fragment_card_front, container, false);
+    public class CardFlipActivity extends FragmentActivity {
+        // A fragment representing the front of the card.
+        public class CardFrontFragment extends Fragment {
+            @Override
+            public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+                return inflater.inflate(R.layout.fragment_card_front, container, false);
+            }
         }
-    }
 
-    // A fragment representing the back of the card.
-    public static class CardBackFragment extends Fragment {
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-            return inflater.inflate(R.layout.fragment_card_back, container, false);
+        // A fragment representing the back of the card.
+        public class CardBackFragment extends Fragment {
+            @Override
+            public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+                return inflater.inflate(R.layout.fragment_card_back, container, false);
+            }
         }
     }
 }
