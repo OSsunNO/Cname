@@ -60,7 +60,7 @@
         app:layout_constraintTop_toBottomOf="@+id/myNameCardText"/>
 
     <TextView
-        android:id="@+id/jobText"
+        android:id="@+id/positionText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
@@ -68,31 +68,7 @@
         android:textSize="18sp"
         app:layout_constraintLeft_toLeftOf="@+id/getInfoRectangular"
         app:layout_constraintTop_toTopOf="@+id/getInfoRectangular"
-        android:text="직업"
-        android:textColor="@color/black0"
-        />
-
-    <EditText
-        android:id="@+id/jobEdit"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:textColor="@color/black0"
-        android:textSize="20sp"
-        android:layout_marginHorizontal="30dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/jobText"
-        />
-    <TextView
-        android:id="@+id/positionText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="15dp"
-        android:textSize="18sp"
-        app:layout_constraintLeft_toLeftOf="@+id/getInfoRectangular"
-        app:layout_constraintTop_toBottomOf="@+id/jobEdit"
-        android:text="소속"
+        android:text="직책"
         android:textColor="@color/black0"
         />
 
@@ -107,6 +83,30 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/positionText"
         />
+    <TextView
+        android:id="@+id/belongText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="15dp"
+        android:textSize="18sp"
+        app:layout_constraintLeft_toLeftOf="@+id/getInfoRectangular"
+        app:layout_constraintTop_toBottomOf="@+id/positionEdit"
+        android:text="소속"
+        android:textColor="@color/black0"
+        />
+
+    <EditText
+        android:id="@+id/belongEdit"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textColor="@color/black0"
+        android:textSize="20sp"
+        android:layout_marginHorizontal="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/belongText"
+        />
 
     <TextView
         android:id="@+id/callText"
@@ -116,7 +116,7 @@
         android:layout_marginLeft="15dp"
         android:textSize="18sp"
         app:layout_constraintLeft_toLeftOf="@+id/getInfoRectangular"
-        app:layout_constraintTop_toBottomOf="@+id/positionEdit"
+        app:layout_constraintTop_toBottomOf="@+id/belongEdit"
         android:text="전화번호"
         android:textColor="@color/black0"
         />
