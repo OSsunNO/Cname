@@ -33,7 +33,7 @@ public class AddCareer extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_singup_initial_info2);
+        setContentView(R.layout.activity_add_career);
 
         saveButton2 = (Button) findViewById(R.id.saveButton2);
         careerCategory =(EditText) findViewById(R.id.EditCCategory);
