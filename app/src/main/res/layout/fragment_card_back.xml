@@ -5,8 +5,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:backgroundTint="#ffffff">
 
-    <androidx.appcompat.widget.LinearLayoutCompat
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/nameCardImageViewBack"
+        android:background="@drawable/custom_namecard"
         android:layout_width="306dp"
         android:layout_height="200dp"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -15,8 +16,19 @@
         app:layout_constraintBottom_toBottomOf="parent"
         >
 
+        <ImageView
+            android:id="@+id/nameOnNameCard"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="36sp"
+            android:src="@drawable/logo_white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.309" />
 
-
-    </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -47,6 +47,8 @@ public class RecyclerViewAdapterInFrag2 extends RecyclerView.Adapter<RecyclerVie
                     if (pos != RecyclerView.NO_POSITION) {
                         Intent intent = new Intent(mContext, FriendPageActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
+                        intent.putExtra("UserName", userId);
+
                         mContext.startActivity(intent);
                     }
                 }

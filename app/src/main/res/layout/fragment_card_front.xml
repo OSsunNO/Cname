@@ -5,14 +5,77 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:backgroundTint="#ffffff">
 
-    <ImageView xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/nameCardImageViewFront"
+        android:background="@drawable/custom_namecard"
         android:layout_width="306dp"
         android:layout_height="200dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:src="@drawable/base_namecard_front" />
+        >
+
+        <TextView
+            android:id="@+id/nameOnNameCard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:text="홍길동"
+            android:textSize="36sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.309" />
+
+        <TextView
+            android:id="@+id/belongOnNameCard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="서울과학기술대학교 ITM전공"
+            android:textSize="10sp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="6dp"
+            app:layout_constraintBottom_toTopOf="@+id/positionOnNameCard"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/positionOnNameCard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="학부 2학년"
+            android:textSize="10sp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="6dp"
+            app:layout_constraintBottom_toTopOf="@+id/callNumberOnNameCard"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/callNumberOnNameCard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="02-123-4567"
+            android:textSize="10sp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="6dp"
+            app:layout_constraintBottom_toTopOf="@+id/emailOnNameCard"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/emailOnNameCard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="nada@gmail.com"
+            android:textSize="10sp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

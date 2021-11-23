@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:backgroundTint="#ffffff">
+    android:background="@color/white1">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/topBarLayout"
@@ -76,14 +76,95 @@
                 android:layout_width="412dp"
                 android:layout_height="300dp">
 
-                <FrameLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    xmlns:android="http://schemas.android.com/apk/res/android"
                     android:id="@+id/container2"
                     android:layout_width="412dp"
                     android:layout_height="240dp"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginTop="0dp"
-                    android:layout_marginEnd="0dp" />
+                    >
+
+                    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:backgroundTint="#ffffff">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/nameCardImageViewFront"
+                            android:background="@drawable/custom_namecard"
+                            android:layout_width="306dp"
+                            android:layout_height="200dp"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            >
+
+                            <TextView
+                                android:id="@+id/nameOnNameCard"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="40dp"
+                                android:textSize="36sp"
+                                android:textColor="@color/white"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintVertical_bias="0.309" />
+
+                            <TextView
+                                android:id="@+id/belongOnNameCard"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="10sp"
+                                android:layout_marginRight="15dp"
+                                android:layout_marginBottom="6dp"
+                                android:textColor="@color/white"
+                                app:layout_constraintBottom_toTopOf="@+id/positionOnNameCard"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                />
+
+                            <TextView
+                                android:id="@+id/positionOnNameCard"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="10sp"
+                                android:layout_marginRight="15dp"
+                                android:layout_marginBottom="6dp"
+                                android:textColor="@color/white"
+                                app:layout_constraintBottom_toTopOf="@+id/callNumberOnNameCard"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                />
+
+                            <TextView
+                                android:id="@+id/callNumberOnNameCard"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="10sp"
+                                android:layout_marginRight="15dp"
+                                android:layout_marginBottom="6dp"
+                                android:textColor="@color/white"
+                                app:layout_constraintBottom_toTopOf="@+id/emailOnNameCard"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                />
+
+                            <TextView
+                                android:id="@+id/emailOnNameCard"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="10sp"
+                                android:layout_marginRight="15dp"
+                                android:layout_marginBottom="10dp"
+                                android:textColor="@color/white"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <Button
                     android:id="@+id/CallBtn"
