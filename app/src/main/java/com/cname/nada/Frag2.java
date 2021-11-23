@@ -111,27 +111,7 @@ public class Frag2 extends Fragment {
                 recyclerView.setAdapter(adapter);
                 adapter.setList(list);
             }
-        }, 180);
-
-
-        FragmentTransaction ft = getFragmentManager().beginTransaction();
-
-        SwipeRefreshLayout mSwipeRefreshLayout = view.findViewById(R.id.swipe_layout);
-        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                ft.commit();
-                final Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        mSwipeRefreshLayout.setRefreshing(false);
-                    }
-                }, 500);
-
-            }
-        });
-        ft.detach(this).attach(this).commit();
+        }, 300);
 
 
         Toast toast = Toast.makeText(getContext(), "유저 정보가 서버로 전송되었습니다.", Toast.LENGTH_LONG);

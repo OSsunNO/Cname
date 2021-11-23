@@ -36,11 +36,11 @@
         android:textColor="#000000"
         android:textSize="60sp"
         android:textStyle="normal"
+        android:text="나다."
         app:layout_constraintBottom_toTopOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="@+id/view"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.596"
-        tools:text="나다." />
+        app:layout_constraintVertical_bias="0.596" />
 
     <TextView
         android:id="@+id/textView"
@@ -59,10 +59,10 @@
         android:textColor="#000000"
         android:textSize="24sp"
         android:textStyle="bold"
+        android:text="나를 \n표현하는 가장\n
+        작은 종이"
         app:layout_constraintBottom_toBottomOf="@+id/view"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:text="나를 \n표현하는 가장\n
-        작은 종이" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
         android:id="@+id/logoutBt"
