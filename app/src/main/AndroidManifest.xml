@@ -17,7 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".functions.AddCareer"></activity>
+        <activity android:name=".AddCareer"></activity>
         <activity
             android:name=".SignupInitialInfoActivity2"
             android:exported="true" />

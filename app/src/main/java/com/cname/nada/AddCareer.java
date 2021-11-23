@@ -1,4 +1,4 @@
-package com.cname.nada.functions;
+package com.cname.nada;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,8 +17,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.cname.nada.MainActivity;
-import com.cname.nada.R;
+import com.cname.nada.functions.UserID;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -97,13 +96,12 @@ public class AddCareer extends AppCompatActivity {
                 JSONObject parameter = new JSONObject();
                 try{
                     parameter.put("user_id", UserID.getUserId());
-                    parameter.put("careerCategory", careerCategory.getText());
-                    parameter.put("careerTitle", careerTitle.getText());
-                    parameter.put("careerStartDate", careerStartDate.getText());
-                    parameter.put("careerFinDate", careerFinDate.getText());
-                    parameter.put("careerContent", careerContent.getText());
-                    parameter.put("CareerPicture", null);
-                    parameter.put("userid", null);
+                    parameter.put("career_category", careerCategory.getText());
+                    parameter.put("career_title", careerTitle.getText());
+                    parameter.put("career_start_date", careerStartDate.getText());
+                    parameter.put("career_fin_date", careerFinDate.getText());
+                    parameter.put("career_content", careerContent.getText());
+                    parameter.put("career_picture", null);
                 }catch (JSONException e){
                     e.printStackTrace();
                 }
