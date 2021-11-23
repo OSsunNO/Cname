@@ -44,7 +44,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     SignInButton googleSignBt;
     private Button fakeGoogle;
     Button logoutBt, toTheMainBt;
-    TextView tempoTextView;
     String url1 = "http://ec2-3-37-249-141.ap-northeast-2.compute.amazonaws.com:8080/user/login/google/";
     String personToken, personName, personGivenName, personFamilyName, personEmail, personId;
     Uri personPhoto;
@@ -160,19 +159,19 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                             Log.d(TAG, "Post success : " + parameter);
 
-//                            try {
-//                                if(response.get("result").toString().equals("true")) {
+                            try {
+                                if(response.get("result").toString().equals("true")) {
                                     Intent intent = new Intent(LoginActivity.this, SignupInitialInfoActivity.class);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                     startActivity(intent);
-//                                } else {
-//                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-//                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                                    startActivity(intent);
-//                                }
-//                            } catch (JSONException e) {
-//                                e.printStackTrace();
-//                            }
+                                } else {
+                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                    startActivity(intent);
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
                         }
                     },
                     new Response.ErrorListener() {

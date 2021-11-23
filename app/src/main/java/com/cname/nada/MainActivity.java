@@ -19,7 +19,6 @@ public class MainActivity extends AppCompatActivity
     private FragmentManager fm;
     private FragmentTransaction ft;
     private Frag1 frag1;
-    private Frag1_career frag1career;
     private Frag2 frag2;
     private Frag3 frag3;
     private Frag4 frag4;

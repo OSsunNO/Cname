@@ -3,6 +3,8 @@ package com.cname.nada;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.telephony.PhoneNumberFormattingTextWatcher;
+import android.telephony.PhoneNumberUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -26,6 +28,9 @@ import org.json.JSONObject;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class SignupInitialInfoActivity extends AppCompatActivity {
 
@@ -77,6 +82,8 @@ public class SignupInitialInfoActivity extends AppCompatActivity {
             }
         });
 
+        phoneEdit.addTextChangedListener(new PhoneNumberFormattingTextWatcher());
+
         nextButton = (Button) findViewById(R.id.nextButton);
 
         nextButton.setOnClickListener(new View.OnClickListener() {
@@ -120,5 +127,32 @@ public class SignupInitialInfoActivity extends AppCompatActivity {
                 queue.add(jsonObjectRequest);
             }
         });
+    }
+
+    public static boolean isValidCellPhoneNumber(String cellphoneNumber) {
+
+        boolean returnValue = false;
+        try {
+            String regex = "^\\s*(010|011|016|017|018|019)(-|\\)|\\s)*(\\d{3,4})(-|\\s)*(\\d{4})\\s*$";
+
+            Pattern p = Pattern.compile(regex);
+            Matcher m = p.matcher(cellphoneNumber);
+            if (m.matches()) {
+                returnValue = true;
+            }
+
+            if (returnValue && cellphoneNumber != null
+                    && cellphoneNumber.length() > 0
+                    && cellphoneNumber.startsWith("010")) {
+                cellphoneNumber = cellphoneNumber.replace("-", "");
+                if (cellphoneNumber.length() != 11) {
+                    returnValue = false;
+                }
+            }
+            return returnValue;
+        } catch (Exception e) {
+            return false;
+        }
+
     }
 }

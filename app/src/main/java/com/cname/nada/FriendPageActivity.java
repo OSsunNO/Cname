@@ -22,11 +22,9 @@ public class FriendPageActivity extends AppCompatActivity {
     private static android.app.Fragment cardFrontFragment;
     private static android.app.Fragment cardBackFragment;
     private String userId = CurrentFriendID.getFriendId();
-    private View view;
     private TextView nameCardIntroduction;
     private boolean showingBack;
     private FrameLayout nameCardView;
-    private Button addCareerBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
