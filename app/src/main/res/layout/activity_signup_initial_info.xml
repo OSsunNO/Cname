@@ -63,7 +63,7 @@
         android:id="@+id/nameText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="45dp"
         android:layout_marginLeft="15dp"
         android:textSize="18sp"
         app:layout_constraintLeft_toLeftOf="@+id/getInfoRectangular"
@@ -110,7 +110,7 @@
         />
 
     <TextView
-        android:id="@+id/emailText"
+        android:id="@+id/blueToothText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
@@ -118,37 +118,12 @@
         android:textSize="18sp"
         app:layout_constraintLeft_toLeftOf="@+id/getInfoRectangular"
         app:layout_constraintTop_toBottomOf="@+id/phoneEdit"
-        android:text="이메일"
-        android:textColor="@color/black0"
-        />
-
-    <EditText
-        android:id="@+id/emailEdit"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:textColor="@color/black0"
-        android:textSize="20sp"
-        android:layout_marginHorizontal="30dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/emailText"
-        />
-
-    <TextView
-        android:id="@+id/jobText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="15dp"
-        android:textSize="18sp"
-        app:layout_constraintLeft_toLeftOf="@+id/getInfoRectangular"
-        app:layout_constraintTop_toBottomOf="@+id/emailEdit"
         android:text="블루투스"
         android:textColor="@color/black0"
         />
 
     <EditText
-        android:id="@+id/jobEdit"
+        android:id="@+id/blueToothEdit"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:textColor="@color/black0"
@@ -156,7 +131,7 @@
         android:layout_marginHorizontal="30dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/jobText"
+        app:layout_constraintTop_toBottomOf="@+id/blueToothText"
         />
 
     <TextView
@@ -167,7 +142,7 @@
         android:layout_marginLeft="15dp"
         android:textSize="18sp"
         app:layout_constraintLeft_toLeftOf="@+id/getInfoRectangular"
-        app:layout_constraintTop_toBottomOf="@+id/jobEdit"
+        app:layout_constraintTop_toBottomOf="@+id/blueToothEdit"
         android:text="생일"
         android:textColor="@color/black0"
         />
