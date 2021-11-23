@@ -1,6 +1,7 @@
 package com.cname.nada.functions;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.cname.nada.FriendPageActivity;
 import com.cname.nada.R;
 
 import java.util.ArrayList;
@@ -17,6 +19,7 @@ public class RecyclerViewAdapterInFrag2 extends RecyclerView.Adapter<RecyclerVie
 
     private ArrayList<ArrayList<String>> mData = null;
     private OnItemClickListener mListener = null;
+    private Context mContext;
 
     public interface OnItemClickListener {
         void onItemClick(View v, int pos);
@@ -42,9 +45,9 @@ public class RecyclerViewAdapterInFrag2 extends RecyclerView.Adapter<RecyclerVie
                 public void onClick(View v) {
                     int pos = getAdapterPosition();
                     if (pos != RecyclerView.NO_POSITION) {
-                        if(mListener != null) {
-                            mListener.onItemClick(v, pos);
-                        }
+                        Intent intent = new Intent(mContext, FriendPageActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                        mContext.startActivity(intent);
                     }
                 }
             });
@@ -58,7 +61,10 @@ public class RecyclerViewAdapterInFrag2 extends RecyclerView.Adapter<RecyclerVie
     }
 
     // 생성자에서 데이터 리스트 객체를 전달받음.
-    public RecyclerViewAdapterInFrag2() { }
+    public RecyclerViewAdapterInFrag2(Context context, ArrayList<ArrayList<String>> list) {
+        this.mData = list;
+        this.mContext = context;
+    }
 
     // onCreateViewHolder() - 아이템 뷰를 위한 뷰홀더 객체 생성하여 리턴.
     @Override
@@ -88,11 +94,5 @@ public class RecyclerViewAdapterInFrag2 extends RecyclerView.Adapter<RecyclerVie
     @Override
     public int getItemCount() {
         return mData.size();
-    }
-
-    // data 모델의 객체들을 list에 저장
-    public void setList(ArrayList<ArrayList<String>> list) {
-        this.mData = list;
-        notifyDataSetChanged();
     }
 }

@@ -41,7 +41,6 @@ public class Frag2 extends Fragment {
     private ImageView searchBtn, sendBtn, settingsInListBtn;
     private String url1 = "http://ec2-3-37-249-141.ap-northeast-2.compute.amazonaws.com:8080/view/friend/" + UserID.getUserId() + "/";
     private final String TAG = this.getClass().getSimpleName();
-    private RecyclerViewAdapterInFrag2 adapter = new RecyclerViewAdapterInFrag2();
 
 
     @Nullable
@@ -90,7 +89,6 @@ public class Frag2 extends Fragment {
             queue.add(jsonArrayRequest);
         }catch (Exception e){ e.printStackTrace();}
 
-
         Handler mHandler = new Handler();
         mHandler.postDelayed(new Runnable() {
             @Override
@@ -100,22 +98,22 @@ public class Frag2 extends Fragment {
                 recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
                 // 리사이클러뷰에 RecyclerViewAdapter 객체 지정.
+                RecyclerViewAdapterInFrag2 adapter = new RecyclerViewAdapterInFrag2(getContext(), list);
                 recyclerView.setAdapter(adapter);
-                adapter.setList(list);
+
+                Toast toast = Toast.makeText(getContext(), "유저 정보가 서버로 전송되었습니다.", Toast.LENGTH_LONG);
+                toast.show();
+
+                adapter.setOnItemClickListener(new RecyclerViewAdapterInFrag2.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View v, int pos) {
+                        Intent intent = new Intent(getContext(), FriendPageActivity.class);
+                        startActivity(intent);
+                    }
+                });
             }
         }, 300);
 
-
-        Toast toast = Toast.makeText(getContext(), "유저 정보가 서버로 전송되었습니다.", Toast.LENGTH_LONG);
-        toast.show();
-
-        adapter.setOnItemClickListener(new RecyclerViewAdapterInFrag2.OnItemClickListener() {
-            @Override
-            public void onItemClick(View v, int pos) {
-                Intent intent = new Intent(getContext(), FriendPageActivity.class);
-                startActivity(intent);
-            }
-        });
 
         searchBtn = (ImageView) view.findViewById(R.id.SearchBtn);
         sendBtn = (ImageView) view.findViewById(R.id.SendBtn);
