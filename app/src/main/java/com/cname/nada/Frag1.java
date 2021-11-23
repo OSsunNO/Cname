@@ -14,6 +14,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.cname.nada.functions.AddCareer;
+
 public class Frag1 extends Fragment {
     private View view;
     private TextView nameCardIntroduction;
@@ -33,6 +35,7 @@ public class Frag1 extends Fragment {
         editBtn = (ImageView) view.findViewById(R.id.EditBtn);
         nameCardView = (FrameLayout) view.findViewById(R.id.container);
         sendBtn = (Button) view.findViewById(R.id.SendBtn);
+        addCareerBtn = (Button) view.findViewById(R.id.plusCareerBtn);
         sendBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -41,6 +44,13 @@ public class Frag1 extends Fragment {
             }
         });
 
+        addCareerBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), AddCareer.class);
+                startActivity(intent);
+            }
+        });
         showingBack = false;
 
         editBtn.setOnClickListener(new View.OnClickListener() {

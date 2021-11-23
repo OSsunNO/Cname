@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white1"
+    tools:context=".MyProfileEditPage">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/topBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/logoImageView"
+            android:layout_width="45dp"
+            android:layout_height="35dp"
+            android:layout_marginLeft="18dp"
+            android:layout_marginTop="12dp"
+            android:contentDescription="@string/app_logo"
+            android:src="@drawable/logo"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/SaveBtn"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="18dp"
+            android:contentDescription="saveBtn"
+            android:src="@drawable/icon_save"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/noto_sans_cjkkr_regular"
+        android:gravity="end"
+        android:letterSpacing="-0.05"
+        android:lineSpacingExtra="11sp"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        android:textStyle="normal"
+        app:layout_constraintBottom_toTopOf="@+id/EditFrame"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.846"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topBarLayout"
+        app:layout_constraintVertical_bias="0.25"
+        tools:text="이력 추가하기" />
+
+    <FrameLayout
+        android:id="@+id/EditFrame"
+        android:layout_width="397dp"
+        android:layout_height="540dp"
+        android:layout_marginBottom="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <View
+            android:layout_width="326dp"
+            android:layout_height="540dp"
+            android:layout_gravity="center"
+            android:background="@drawable/custom_24019" />
+
+        <ScrollView
+            android:id="@+id/scrollView2"
+            android:layout_width="330dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="@+id/scrollView2"
+                app:layout_constraintEnd_toEndOf="@+id/scrollView2"
+                app:layout_constraintStart_toStartOf="@+id/scrollView2"
+                app:layout_constraintTop_toTopOf="@+id/scrollView2">
+
+                <TextView
+                    android:id="@+id/TextCCategory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="22dp"
+                    android:layout_marginTop="24dp"
+                    android:gravity="center"
+                    android:text="경력 분류"
+                    android:textColor="@color/black1"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/EditCCategory"
+                    android:layout_width="325dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="2dp"
+                    android:layout_marginTop="3dp"
+                    android:gravity="center"
+                    android:hint="경력 종류를 입력해 주십시오."
+                    android:textColor="@color/black1"
+                    android:textColorHint="@color/gray1" />
+
+                <TextView
+                    android:id="@+id/TextCName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="22dp"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center"
+                    android:text="경력 이름"
+                    android:textColor="@color/black1"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/EditCName"
+                    android:layout_width="325dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="2dp"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center"
+                    android:hint="경력 이름을 입력해 주십시오."
+                    android:textColor="@color/black1"
+                    android:textColorHint="@color/gray1" />
+
+                <TextView
+                    android:id="@+id/TextCStart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="22dp"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center"
+                    android:text="경력 시작일"
+                    android:textColor="@color/black1"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/EditCStart"
+                    android:layout_width="325dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="2dp"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center"
+                    android:hint="시작한 날짜를 입력해 주십시오."
+                    android:textColor="@color/black1"
+                    android:textColorHint="@color/gray1" />
+
+                <TextView
+                    android:id="@+id/TextCFin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="22dp"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center"
+                    android:text="경력 종료일"
+                    android:textColor="@color/black1"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/EditCFin"
+                    android:layout_width="325dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="2dp"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center"
+                    android:hint="종료된 날짜를 입력해 주십시오."
+                    android:textColor="@color/black1"
+                    android:textColorHint="@color/gray1" />
+                <TextView
+                    android:id="@+id/TextCContent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="22dp"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center"
+                    android:text="경력 종료일"
+                    android:textColor="@color/black1"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/EditCContent"
+                    android:layout_width="325dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="2dp"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center"
+                    android:hint="종료된 날짜를 입력해 주십시오."
+                    android:textColor="@color/black1"
+                    android:textColorHint="@color/gray1" />
+
+
+            </LinearLayout>
+
+        </ScrollView>
+    </FrameLayout>
+    <Button
+        android:id="@+id/saveButton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="664dp"
+        android:layout_marginEnd="160dp"
+        android:backgroundTint="@color/beige0"
+        android:text="저장하기"
+        android:textColor="@color/black0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
