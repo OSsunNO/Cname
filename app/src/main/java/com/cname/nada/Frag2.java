@@ -18,10 +18,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -29,7 +27,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
-import com.cname.nada.functions.CurrentFriendID;
 import com.cname.nada.functions.RecyclerViewAdapterInFrag2;
 import com.cname.nada.functions.UserID;
 
@@ -45,12 +42,7 @@ public class Frag2 extends Fragment {
     private String url1 = "http://ec2-3-37-249-141.ap-northeast-2.compute.amazonaws.com:8080/view/friend/" + UserID.getUserId() + "/";
     private final String TAG = this.getClass().getSimpleName();
     private RecyclerViewAdapterInFrag2 adapter = new RecyclerViewAdapterInFrag2();
-    
-    @Override
-    public void onCreate(Bundle savedInstanceState){
-        super.onCreate(savedInstanceState);
 
-    }
 
     @Nullable
     @Override
@@ -119,8 +111,7 @@ public class Frag2 extends Fragment {
 
         adapter.setOnItemClickListener(new RecyclerViewAdapterInFrag2.OnItemClickListener() {
             @Override
-            public void onItemClick(View v, int pos, String userId) {
-                CurrentFriendID.setFriendId(userId);
+            public void onItemClick(View v, int pos) {
                 Intent intent = new Intent(getContext(), FriendPageActivity.class);
                 startActivity(intent);
             }

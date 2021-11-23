@@ -19,7 +19,7 @@ public class RecyclerViewAdapterInFrag2 extends RecyclerView.Adapter<RecyclerVie
     private OnItemClickListener mListener = null;
 
     public interface OnItemClickListener {
-        void onItemClick(View v, int pos, String userId);
+        void onItemClick(View v, int pos);
     }
 
     public void setOnItemClickListener (OnItemClickListener listener) {
@@ -43,7 +43,7 @@ public class RecyclerViewAdapterInFrag2 extends RecyclerView.Adapter<RecyclerVie
                     int pos = getAdapterPosition();
                     if (pos != RecyclerView.NO_POSITION) {
                         if(mListener != null) {
-                            mListener.onItemClick(v, pos, userId);
+                            mListener.onItemClick(v, pos);
                         }
                     }
                 }
