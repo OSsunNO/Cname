@@ -1,20 +1,15 @@
 package com.cname.nada;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 
 import com.cname.nada.functions.CurrentFriendID;
 
@@ -33,12 +28,12 @@ public class FriendPageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_friend_page);
 
         nameCardIntroduction = (TextView) findViewById(R.id.nameCardIntroduction);
-        nameCardView = (FrameLayout) findViewById(R.id.container);
+        nameCardView = (FrameLayout) findViewById(R.id.container2);
 
         showingBack = false;
 
         if (savedInstanceState == null) {
-            getFragmentManager().beginTransaction().add(R.id.container, cardFrontFragment).commit();
+            getFragmentManager().beginTransaction().add(R.id.container2, cardFrontFragment).commit();
             // R.id.container, new FriendPageActivity.CardFrontFragment()
         }
 
@@ -63,7 +58,7 @@ public class FriendPageActivity extends AppCompatActivity {
                             R.animator.card_flip_right_out,
                             R.animator.card_flip_left_in,
                             R.animator.card_flip_left_out)
-                    .replace(R.id.container, cardFrontFragment).commit();
+                    .replace(R.id.container2, cardFrontFragment).commit();
             return;
         }
 
@@ -86,7 +81,7 @@ public class FriendPageActivity extends AppCompatActivity {
                 // Replace any fragments currently in the container view with a
                 // fragment representing the next page (indicated by the
                 // just-incremented currentPage variable).
-                .replace(R.id.container, cardBackFragment)
+                .replace(R.id.container2, cardBackFragment)
 
                 // Add this transaction to the back stack, allowing users to press
                 // Back to get to the front of the card.
