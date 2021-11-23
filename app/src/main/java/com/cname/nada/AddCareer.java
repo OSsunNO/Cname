@@ -105,29 +105,25 @@ public class AddCareer extends AppCompatActivity {
                 }catch (JSONException e){
                     e.printStackTrace();
                 }
+                JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url1, parameter,
+                        new Response.Listener<JSONObject>() {
+                            @Override
+                            public void onResponse(JSONObject response) {
+                                Intent intent = new Intent(AddCareer.this, MainActivity.class);
+                                startActivity(intent);
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                Toast toast = Toast.makeText(AddCareer.this, "유저 정보가 정상적으로 전송되지 않습니다.", Toast.LENGTH_LONG);
+                                toast.show();
 
-                try {
-                    JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url1, parameter,
-                            new Response.Listener<JSONObject>() {
-                                @Override
-                                public void onResponse(JSONObject response) {
-                                    Intent intent = new Intent(AddCareer.this, MainActivity.class);
-                                    startActivity(intent);
-                                }
-                            },
-                            new Response.ErrorListener() {
-                                @Override
-                                public void onErrorResponse(VolleyError error) {
-                                    Toast toast = Toast.makeText(AddCareer.this, "유저 정보가 정상적으로 전송되지 않습니다.", Toast.LENGTH_LONG);
-                                    toast.show();
-
-                                    error.printStackTrace();
-                                    Log.d(TAG, "Post Fail");
-                                }
-                            });
-                }catch (Exception e){ e.printStackTrace();}
-
-
+                                error.printStackTrace();
+                                Log.d(TAG, "Post Fail");
+                            }
+                        });
+                queue.add(jsonObjectRequest);
             }
         });
     }
