@@ -7,7 +7,6 @@
     tools:context=".MainActivity"
     android:background="@color/white1">
 
-
     <View
         android:id="@+id/view"
         android:layout_width="360dp"
@@ -18,7 +17,9 @@
         app:layout_constraintHorizontal_bias="0.588"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.225"></View>
+        app:layout_constraintVertical_bias="0.225"
+        tools:visibility="invisible">
+    </View>
 
     <TextView
         android:layout_width="wrap_content"
