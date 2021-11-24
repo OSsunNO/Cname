@@ -34,7 +34,7 @@
             android:layout_marginTop="15dp"
             android:layout_marginRight="18dp"
             android:contentDescription="saveBtn"
-            android:src="@drawable/icon_save"
+            android:background="@drawable/icon_save"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
