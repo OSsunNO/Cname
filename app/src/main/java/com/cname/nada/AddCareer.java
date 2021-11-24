@@ -7,6 +7,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -40,7 +41,7 @@ public class AddCareer extends AppCompatActivity {
         careerTitle =(EditText) findViewById(R.id.EditCName);
         careerStartDate =(EditText) findViewById(R.id.EditCStart);
         careerFinDate =(EditText) findViewById(R.id.EditCFin);
-        careerContent =(EditText) findViewById(R.id.EditCContent);
+        careerContent =(EditText) findViewById(R.id.EditCcontent);
 
         careerCategory.setOnKeyListener(new View.OnKeyListener() {
             @Override
