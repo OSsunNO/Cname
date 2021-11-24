@@ -1,16 +1,24 @@
 package com.cname.nada;
 
+import android.content.Context;
 import android.content.Intent;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,10 +29,16 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.cname.nada.functions.RecyclerViewAdapterInFrag1AndFriendPage;
+import com.cname.nada.functions.UserID;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class FriendPageActivity extends AppCompatActivity {
@@ -34,6 +48,7 @@ public class FriendPageActivity extends AppCompatActivity {
     private TextView name, belong, position, call, email;
     private JSONArray careerInfoJsonArray, userInfoJsonArray, belongInfoJsonArray;
     private Button callBtn;
+    private ImageView returnBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +56,14 @@ public class FriendPageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_friend_page);
 
         callBtn = findViewById(R.id.CallBtn);
+
+        returnBtn = findViewById(R.id.BackBtn);
+        returnBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         Intent intent = getIntent();
         String url1 = "http://ec2-3-37-249-141.ap-northeast-2.compute.amazonaws.com:8080/namecard/my/" + intent.getStringExtra("UserName") + "/";
@@ -117,9 +140,6 @@ public class FriendPageActivity extends AppCompatActivity {
                 // 리사이클러뷰에 RecyclerViewAdapter 객체 지정.
                 RecyclerViewAdapterInFrag1AndFriendPage adapter = new RecyclerViewAdapterInFrag1AndFriendPage(list);
                 recyclerView.setAdapter(adapter);
-
-                Toast toast = Toast.makeText(FriendPageActivity.this, "유저 정보가 서버로 전송되었습니다.", Toast.LENGTH_LONG);
-                toast.show();
 
                 // adapter.setOnItemClickListener(new RecyclerViewAdapterInFrag2.OnItemClickListener() {
                 //  @Override

@@ -139,8 +139,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
-                            Toast toast = Toast.makeText(getApplicationContext(), "유저 정보가 서버로 전송되었습니다.", Toast.LENGTH_LONG);
-                            toast.show();
 
                             try {
                                 FileOutputStream outputStream = openFileOutput("userId.txt", Context.MODE_PRIVATE);
