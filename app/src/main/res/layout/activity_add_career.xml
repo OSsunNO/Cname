@@ -56,7 +56,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/topBarLayout"
         app:layout_constraintVertical_bias="0.25"
-        tools:text="이력 추가하기" />
+        android:text="이력 추가하기" />
 
     <FrameLayout
         android:id="@+id/EditFrame"

@@ -14,12 +14,11 @@
         android:background="@drawable/custom_23925"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.588"
+        app:layout_constraintHorizontal_bias="0.372"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.225"
-        tools:visibility="invisible">
-    </View>
+        app:layout_constraintVertical_bias="0.492"
+        tools:visibility="invisible"></View>
 
     <TextView
         android:layout_width="wrap_content"
@@ -64,38 +63,13 @@
         app:layout_constraintBottom_toBottomOf="@+id/view"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <Button
-        android:id="@+id/logoutBt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:text="로그아웃"
-        app:layout_constraintBottom_toTopOf="@+id/ToTheMainButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/ToTheMainButton"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginHorizontal="30dp"
-        android:layout_marginBottom="4dp"
-        android:background="@drawable/custom_bg_button"
-        android:text="메인으로 가는 임시버튼"
-        android:textColor="@color/black0"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <FrameLayout
         android:id="@+id/GoogleLoginFrame"
-        android:layout_width="match_parent"
+        android:layout_width="362dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="513dp"
-        android:layout_marginBottom="97dp"
-        app:layout_constraintBottom_toBottomOf="@+id/view"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/view">
@@ -104,11 +78,11 @@
             android:id="@+id/GoogleLoginButton"
             android:layout_width="300dp"
             android:layout_height="match_parent"
+            android:layout_gravity="center"
             android:layout_marginHorizontal="40dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.619"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_gravity="center"
             tools:layout_editor_absoluteY="527dp"
             tools:visibility="visible">
 
@@ -117,12 +91,12 @@
                 android:id="@+id/GoogleLoginFake"
                 android:layout_width="300dp"
                 android:layout_height="60dp"
+                android:layout_gravity="center"
                 android:layout_marginHorizontal="30dp"
                 android:background="@drawable/login_custom"
                 android:drawableLeft="@drawable/google_logo_resized"
                 android:paddingLeft="15dp"
                 android:text="google로 로그인하기"
-                android:layout_gravity="center"
                 android:textColor="@color/black0"
                 android:textSize="18sp"
                 android:textStyle="bold"
