@@ -136,9 +136,6 @@ public class Frag1 extends Fragment {
                 RecyclerViewAdapterInFrag1AndFriendPage adapter = new RecyclerViewAdapterInFrag1AndFriendPage(list);
                 recyclerView.setAdapter(adapter);
 
-                Toast toast = Toast.makeText(getContext(), "유저 정보가 서버로 전송되었습니다.", Toast.LENGTH_LONG);
-                toast.show();
-
                 // adapter.setOnItemClickListener(new RecyclerViewAdapterInFrag2.OnItemClickListener() {
                 //  @Override
                 //  public void onItemClick(View v, int pos) {
