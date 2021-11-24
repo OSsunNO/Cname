@@ -17,7 +17,6 @@
         app:layout_constraintHorizontal_bias="0.372"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.492"
         tools:visibility="invisible"></View>
 
     <TextView
@@ -41,12 +40,13 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.596" />
 
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="172dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="164dp"
         android:fontFamily="@font/noto_sans_cjkkr_bold"
         android:gravity="end"
         android:letterSpacing="-0.05"
@@ -55,14 +55,13 @@
         android:shadowDx="5"
         android:shadowDy="3"
         android:shadowRadius="6"
+        android:text="나를 \n표현하는 가장\n
+        작은 종이"
         android:textColor="#000000"
         android:textSize="24sp"
         android:textStyle="bold"
-        android:text="나를 \n표현하는 가장\n
-        작은 종이"
         app:layout_constraintBottom_toBottomOf="@+id/view"
-        app:layout_constraintEnd_toEndOf="parent" />
-
+        app:layout_constraintEnd_toEndOf="@+id/view" />
 
     <FrameLayout
         android:id="@+id/GoogleLoginFrame"

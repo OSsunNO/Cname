@@ -25,6 +25,7 @@ import org.json.JSONObject;
 
 public class AddCareer extends AppCompatActivity {
 
+    ImageView returnBtn;
     Button saveButton2;
     EditText careerCategory, careerTitle, careerStartDate, careerFinDate, careerContent;
     private String url1 = "http://ec2-3-37-249-141.ap-northeast-2.compute.amazonaws.com:8080/career/upload/";
@@ -36,12 +37,20 @@ public class AddCareer extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_career);
 
+        returnBtn = (ImageView) findViewById(R.id.ReturnBtn);
         saveButton2 = (Button) findViewById(R.id.saveButton2);
         careerCategory =(EditText) findViewById(R.id.EditCCategory);
         careerTitle =(EditText) findViewById(R.id.EditCName);
         careerStartDate =(EditText) findViewById(R.id.EditCStart);
         careerFinDate =(EditText) findViewById(R.id.EditCFin);
         careerContent =(EditText) findViewById(R.id.EditCcontent);
+
+        returnBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         careerCategory.setOnKeyListener(new View.OnKeyListener() {
             @Override

@@ -108,7 +108,7 @@ public class Frag1 extends Fragment {
                 call.setText(element2.optString("tel_data"));
                 email.setText(element1.optString("email"));
             }
-        }, 80);
+        }, 150);
 
 
 
@@ -144,7 +144,7 @@ public class Frag1 extends Fragment {
                 //  }
                 //});
             }
-        }, 180);
+        }, 250);
 
 
         sendBtn.setOnClickListener(new View.OnClickListener() {

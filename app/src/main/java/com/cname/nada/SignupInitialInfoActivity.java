@@ -106,8 +106,6 @@ public class SignupInitialInfoActivity extends AppCompatActivity {
                         new Response.Listener<JSONObject>() {
                             @Override
                             public void onResponse(JSONObject response) {
-                                Toast toast = Toast.makeText(getApplicationContext(), "유저 정보가 서버로 전송되었습니다.", Toast.LENGTH_LONG);
-                                toast.show();
 
                                 Intent intent = new Intent(SignupInitialInfoActivity.this, SignupInitialInfoActivity2.class);
                                 startActivity(intent);

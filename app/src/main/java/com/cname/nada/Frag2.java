@@ -78,8 +78,6 @@ public class Frag2 extends Fragment {
                     new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Toast toast = Toast.makeText(getContext(), "유저 정보가 정상적으로 전송되지 않습니다.", Toast.LENGTH_LONG);
-                            toast.show();
 
                             error.printStackTrace();
                             Log.d(TAG, "Post Fail");

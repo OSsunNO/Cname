@@ -58,12 +58,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         fakeGoogle.setOnClickListener(this);
 //        googleSignBt.setOnClickListener(this);
 
-        logoutBt = findViewById(R.id.logoutBt);
-        logoutBt.setOnClickListener(this);
-
-        toTheMainBt = (Button) findViewById(R.id.ToTheMainButton);
-        toTheMainBt.setOnClickListener(this);
-
 
         // [START configure_signin]
         // 앱에 필요한 사용자 데이터를 요청하도록 로그인 옵션을 설정한다.
@@ -94,18 +88,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             case R.id.GoogleLoginFake:
                 googleSignBt.performClick();
                 signIn();
-                break;
-            case R.id.logoutBt:
-                mGoogleSignInClient.signOut()
-                        .addOnCompleteListener(this, task -> {
-                            Log.d(TAG, "onClick:logout success ");
-                            mGoogleSignInClient.revokeAccess()
-                                    .addOnCompleteListener(this, task1 -> Log.d(TAG, "onClick:revokeAccess success "));
-                        });
-                break;
-            case R.id.ToTheMainButton:
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                finish();
                 break;
         }
     }

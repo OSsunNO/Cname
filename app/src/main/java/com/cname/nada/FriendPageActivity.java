@@ -115,7 +115,7 @@ public class FriendPageActivity extends AppCompatActivity {
                 call.setText(element2.optString("tel_data"));
                 email.setText(element1.optString("email"));
             }
-        }, 80);
+        }, 150);
 
         Handler mHandler1 = new Handler();
         mHandler1.postDelayed(new Runnable() {
@@ -149,7 +149,7 @@ public class FriendPageActivity extends AppCompatActivity {
                 //  }
                 //});
             }
-        }, 180);
+        }, 250);
 
         callBtn.setOnClickListener(new View.OnClickListener() {
             @Override
